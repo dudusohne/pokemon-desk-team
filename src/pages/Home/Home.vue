@@ -1,43 +1,57 @@
 <template>
-  <div v-if="!list.length" class="pokeheader">HEADER</div>
-  <div v-else class="pokeball">
-    <img src="../../assets/ash.png" alt="ash" />
-    <TeamCard
-      v-for="(pokemon, i) in list"
-      :key="i"
-      :pokemon="pokemon"
-      :entry_number="pokemon.id"
-      :pokemon_species="pokemon.name"
-      @click="handleRemove(pokemon.id)"
-    />
-  </div>
-  <div class="pokemonlist q-gutter-md">
-    <PokeCard
-      v-for="(pokemon, i) in pokeData"
-      :key="i"
-      :pokemon="pokemon"
-      :entry_number="pokemon.entry_number"
-      :pokemon_species="pokemon.pokemon_species.name.toUpperCase()"
-      @click="details(pokemon.pokemon_species.url)"
-    />
-    <Modal
-      v-model="modal"
-      :pokemon="pokemon"
-      :id="pokemon.id"
-      :name="pokemon.name"
-      :base_experience="pokemon.base_experience"
-      :height="pokemon.height"
-      :weight="pokemon.weight"
-      :abilities="pokemon.abilities"
-      :types="pokemon.types"
-      :description="pokemon.description"
-      :src="pokemon.entry_number"
-    >
-      <template v-slot:modalButton>
-        <q-btn color="green" label="ADICIONAR AO TIME" @click="addNewTeam()" />
-        <q-btn color="black" label="FECHAR" v-close-popup />
-      </template>
-    </Modal>
+  <div class="home">
+    <div v-if="!list.length" class="pokeheader">
+      <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
+      <div class="banner">
+        <h1>POKE</h1>
+        <h3>DESK</h3>
+      </div>
+      <div class="searchBox">
+        <h1>Search for a Pokemon</h1>
+        <input type="text" placeholder="Search..." />
+        <q-btn dense round icon="search" color="black">
+        </q-btn>
+      </div>
+    </div>
+    <div v-else class="pokeball">
+      <img class="ashImg" src="../../assets/ash.png" alt="ash" />
+      <TeamCard
+        v-for="(pokemon, i) in list"
+        :key="i"
+        :pokemon="pokemon"
+        :entry_number="pokemon.id"
+        :pokemon_species="pokemon.name"
+        @click="handleRemove(pokemon.id)"
+      />
+    </div>
+    <div class="pokemonlist q-gutter-md">
+      <PokeCard
+        v-for="(pokemon, i) in pokeData"
+        :key="i"
+        :pokemon="pokemon"
+        :entry_number="pokemon.entry_number"
+        :pokemon_species="pokemon.pokemon_species.name.toUpperCase()"
+        @click="details(pokemon.pokemon_species.url)"
+      />
+      <Modal
+        v-model="modal"
+        :pokemon="pokemon"
+        :id="pokemon.id"
+        :name="pokemon.name"
+        :base_experience="pokemon.base_experience"
+        :height="pokemon.height"
+        :weight="pokemon.weight"
+        :abilities="pokemon.abilities"
+        :types="pokemon.types"
+        :description="pokemon.description"
+        :src="pokemon.entry_number"
+      >
+        <template v-slot:modalButton>
+          <q-btn color="green" label="ADICIONAR AO TIME" @click="addNewTeam()" />
+          <q-btn color="black" label="FECHAR" v-close-popup />
+        </template>
+      </Modal>
+    </div>
   </div>
 </template>
 
@@ -152,43 +166,112 @@ async function details(url: string) {
 </script>
 
 <style lang="scss" scoped>
-.pokeheader {
-  background-color: red;
+.home {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 187, 187);
+  height: 100%;
+  .pokeheader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    height: 10vh;
+    padding: 0.2rem 2rem 0.2rem 2rem;
+    background-color: rgb(236, 232, 222);
+    z-index: 10;
+    border-top: 3px double rgb(37, 112, 197);
+    border-bottom: 3px double rgb(37, 112, 197);
+    .logo {
+      width: 9%;
+    }
+    .banner {
+      display: flex;
+      flex-direction: center;
+      justify-content: flex-start;
+      align-items: center;
+      width: 91%;
+      z-index: 10;
+
+      h1 {
+        font-size: 3.4rem;
+        font-weight: bold;
+        color: rgb(10, 17, 51);
+        margin-left: 2rem;
+        line-height: 1.2rem;
+        letter-spacing: 0.1rem;
+      }
+      h3 {
+        font-size: 3.6rem;
+        font-weight: bold;
+        color: rgb(77, 72, 72);
+      }
+    }
+    .searchBox {
+      display: flex;
+      flex-direction: row;
+      width: 70%;
+      align-items: center;
+      justify-content: space-between;
+      height: 80%;
+      background-color: rgb(170, 80, 80);
+      border-radius: 16px;
+      padding: 0.9rem 2rem 0.9rem 2rem;
+      h1 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+      }
+      input {
+        width: 50%;
+        border: none;
+        background-color: rgb(255, 255, 255);
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: rgb(10, 17, 51);
+        margin-left: 1rem;
+        border-radius: 12px;
+        padding-left: 1rem;
+      }
+    }
+  }
+}
+
+.pokeball {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  min-height: 100px;
+  padding: 0 0 0 1.2rem;
+  margin-bottom: 1rem;
+  justify-content: flex-start;
+  background-color: rgba(224, 219, 209, 0.932);
+  padding: 1rem 0 1rem 0;
+  z-index: 10;
+
+  p {
+    font-size: 1.1rem;
+    font-weight: medium;
+    color: rgb(136, 136, 136);
+  }
+
+  .ashImg {
+    height: 100px;
+    border-radius: 12px;
+    margin-right: 1.2rem;
+    margin-left: 1.9rem;
+  }
 }
 .pokemonlist {
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 1;
   justify-content: center;
-  background-color: green;
-
-  .pokeball {
-    display: flex;
-    flex-direction: row;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    min-height: 100px;
-    padding: 0 0 0 1.2rem;
-    margin-bottom: 1rem;
-    justify-content: flex-start;
-    background-color: rgba(224, 219, 209, 0.932);
-    padding: 1rem 0 1rem 0;
-    z-index: 10;
-
-    p {
-      font-size: 1.1rem;
-      font-weight: medium;
-      color: rgb(136, 136, 136);
-    }
-
-    img {
-      height: 100px;
-      border-radius: 12px;
-      margin-right: 1.2rem;
-      margin-left: 1.9rem;
-    }
-  }
+  background-color: rgb(29, 28, 28);
+  z-index: 1;
+  margin-top: 0.2px;
 }
 #modal {
   position: absolute;
