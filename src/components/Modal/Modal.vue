@@ -2,13 +2,20 @@
     <q-dialog transition-show="slide-down" transition-hide="slide-down">
         <q-card class="text-white">
             <div :style="{ 'background-color': props.pokemon.color }">
-                <q-bar>
+                <img
+                    style="width: 90%; height: 100%"
+                    src="../../assets/headerpokedex.png"
+                    alt="pokedex"
+                />
+                <q-bar style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
                     <q-btn rounded>
                         <span
-                            style="align-self: center; font-size: 25px; font-weight: bold;"
+                            style="font-size: 25px; font-weight: bold;"
                         >#{{ props.pokemon.id }}</span>
                     </q-btn>
-                    <q-space />
+                     <span
+                                style="align-self: flex-start; font-size: 28px; font-weight: bold; color: rgb(31, 31, 31);"
+                            >{{ props.pokemon.name }}</span>
 
                     <q-btn dense flat icon="close" v-close-popup>
                         <q-tooltip class="bg-white text-primary">Close</q-tooltip>
@@ -18,9 +25,7 @@
                 <q-card-section>
                     <div style="display: flex; flex-direction: column; align-items: center">
                         <div>
-                            <span
-                                style="align-self: flex-start; font-size: 28px; font-weight: bold; color: rgb(31, 31, 31);"
-                            >{{ props.pokemon.name }}</span>
+                           
                         </div>
                         <img
                             :src="getPokemonImg(props.pokemon.id)"
