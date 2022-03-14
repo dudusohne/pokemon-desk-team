@@ -1,17 +1,17 @@
 <template>
+  <div v-if="!list.length" class="pokeheader">HEADER</div>
+  <div v-else class="pokeball">
+    <img src="../../assets/ash.png" alt="ash" />
+    <TeamCard
+      v-for="(pokemon, i) in list"
+      :key="i"
+      :pokemon="pokemon"
+      :entry_number="pokemon.id"
+      :pokemon_species="pokemon.name"
+      @click="handleRemove(pokemon.id)"
+    />
+  </div>
   <div class="pokemonlist q-gutter-md">
-    <!-- <div :v-if="!!list"></div> -->
-    <div bind:v-else class="pokeball">
-      <img src="../../assets/ash.png" alt="ash" />
-      <TeamCard
-        v-for="(pokemon, i) in list"
-        :key="i"
-        :pokemon="pokemon"
-        :entry_number="pokemon.id"
-        :pokemon_species="pokemon.name"
-        @click="handleRemove(pokemon.id)"
-      />
-    </div>
     <PokeCard
       v-for="(pokemon, i) in pokeData"
       :key="i"
@@ -152,11 +152,15 @@ async function details(url: string) {
 </script>
 
 <style lang="scss" scoped>
+.pokeheader {
+  background-color: red;
+}
 .pokemonlist {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
   justify-content: center;
+  background-color: green;
 
   .pokeball {
     display: flex;
