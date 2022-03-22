@@ -181,8 +181,8 @@ async function details(url: string) {
     padding: 0.2rem 2rem 0.2rem 2rem;
     background-color: rgb(236, 232, 222);
     z-index: 10;
-    border-top: 3px double rgb(37, 112, 197);
-    border-bottom: 3px double rgb(37, 112, 197);
+    border-top: 3px double rgb(58, 59, 59);
+    border-bottom: 3px double rgb(58, 59, 59);
     .logo {
       width: 9%;
     }

@@ -1,5 +1,5 @@
 <template>
-    <q-card light bordered class="bg-grey-3 my-card" @click="props.pokemon.clicked">
+    <q-card light bordered class="my-card" @click="props.pokemon.clicked">
         <q-card-section>
             <div class="card-section">
                 <div class="button-bckground">
@@ -37,6 +37,9 @@ function getPokemonImg(entryNumber: number): string {
 </script>
 
 <style scoped lang="scss">
+.my-card {
+    background-color: rgb(128, 128, 128);
+}
 .card-section {
     display: flex;
     flex-direction: column;

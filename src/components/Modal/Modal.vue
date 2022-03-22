@@ -1,21 +1,17 @@
 <template>
     <q-dialog transition-show="slide-down" transition-hide="slide-down">
         <q-card class="text-white">
-            <div :style="{ 'background-color': props.pokemon.color }">
-                <img
-                    style="width: 90%; height: 100%"
-                    src="../../assets/headerpokedex.png"
-                    alt="pokedex"
-                />
-                <q-bar style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+            <div :style="{ 'background-color': props.pokemon.color, 'overflow': 'hidden' }">
+                <img class="pokedeximgheader" src="../../assets/headerpokedex.png" alt="pokedex" />
+                <q-bar
+                    style="display: flex; flex-direction: row; justify-content: space-between; align-items: center"
+                >
                     <q-btn rounded>
-                        <span
-                            style="font-size: 25px; font-weight: bold;"
-                        >#{{ props.pokemon.id }}</span>
+                        <span style="font-size: 25px; font-weight: bold;">#{{ props.pokemon.id }}</span>
                     </q-btn>
-                     <span
-                                style="align-self: flex-start; font-size: 28px; font-weight: bold; color: rgb(31, 31, 31);"
-                            >{{ props.pokemon.name }}</span>
+                    <span
+                        style="align-self: flex-start; font-size: 28px; font-weight: bold; color: rgb(31, 31, 31);"
+                    >{{ props.pokemon.name }}</span>
 
                     <q-btn dense flat icon="close" v-close-popup>
                         <q-tooltip class="bg-white text-primary">Close</q-tooltip>
@@ -24,9 +20,7 @@
 
                 <q-card-section>
                     <div style="display: flex; flex-direction: column; align-items: center">
-                        <div>
-                           
-                        </div>
+                        <div></div>
                         <img
                             :src="getPokemonImg(props.pokemon.id)"
                             alt="image"
@@ -129,3 +123,12 @@ const emit = defineEmits<{
 
 emit('clicked')
 </script>
+
+<style lang="scss" scoped="true">
+.pokedeximgheader {
+    width: 108%;
+    height: auto;
+    margin-left: -1rem;
+    margin-top: -1rem;
+}
+</style>
