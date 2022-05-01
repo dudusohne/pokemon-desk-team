@@ -216,6 +216,7 @@ async function details(url: string) {
 
       img {
         border: 2px solid #333;
+        
       }
 
       span {
