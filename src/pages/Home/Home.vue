@@ -6,11 +6,17 @@
         <h1>POKE</h1>
         <h3>DESK</h3>
       </div>
-      <div class="searchBox">
+      <!-- <div class="searchBox">
         <h1>Search for a Pokemon</h1>
         <input type="text" placeholder="Search..." v-model="searchInput" />
         <q-btn dense round icon="search" color="black" @click="filterPokemon(searchInput)">
         </q-btn>
+      </div> -->
+      <div class="user-data">
+        <span>{{ auth.currentUser?.displayName }}</span>
+        <q-avatar>
+          <img :src="auth.currentUser?.photoURL">
+        </q-avatar>
       </div>
     </div>
     <div v-else class="pokeball">
@@ -41,6 +47,8 @@ import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
 import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
+import { useRoute } from "vue-router";
+import { getAuth } from "firebase/auth";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -76,7 +84,12 @@ const pokemon = reactive<Pokemon>({
   description: '',
 });
 
-const searchInput = ref<any>()
+// const searchInput = ref<any>()
+
+const route = useRoute()
+
+const auth = getAuth();
+console.log(auth.currentUser?.displayName)
 
 onBeforeMount(() => {
   pokemonList()
@@ -117,13 +130,12 @@ const pokemonList = async () => {
 };
 
 function filterPokemon(searchInput: string) {
-  pokeData.value.filter((poke: any ) => {
+  pokeData.value.filter((poke: any) => {
     if (poke.pokemon_species.name.toLowerCase().includes(searchInput.toLowerCase())) {
       return poke;
     }
   });
 }
-
 
 /*
 * Handle's the pokemon details load/render
@@ -166,6 +178,7 @@ async function details(url: string) {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     position: sticky;
     top: 0;
     height: 10vh;
@@ -186,6 +199,23 @@ async function details(url: string) {
 
       @media only screen and (max-device-width: 480px) {
         width: 30%;
+      }
+    }
+
+    .user-data {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+
+      
+      
+      span {
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
+
+        margin-right: 1rem;
       }
     }
 
