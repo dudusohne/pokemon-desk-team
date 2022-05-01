@@ -23,7 +23,7 @@ onMounted(
   () => {
     getAuth().onAuthStateChanged(
       (user) => {
-        if (user) {
+        if (!!user) {
           router.push("/home");
         }
       }
