@@ -12,11 +12,25 @@
 
 <script setup lang="ts">
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const provider = new GoogleAuthProvider();
 
 const router = useRouter()
+
+onMounted(
+  () => {
+    getAuth().onAuthStateChanged(
+      (user) => {
+        if (user) {
+          router.push("/home");
+        }
+      }
+    );
+  }
+);
+)
 
 function Login() {
 
