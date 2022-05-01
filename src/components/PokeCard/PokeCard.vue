@@ -10,7 +10,7 @@
                 <img :src="getPokemonImg(props.pokemon.entry_number)" alt="image" />
                 <p class="pokename">
                     {{
-                        props.pokemon.pokemon_species.name?.toUpperCase()
+                            props.pokemon.pokemon_species.name?.toUpperCase()
                     }}
                 </p>
             </div>
@@ -38,11 +38,16 @@ function getPokemonImg(entryNumber: number): string {
 
 <style scoped lang="scss">
 .my-card {
-    background-color: rgb(128, 128, 128);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(198, 198, 198, 1) 93%);
+    border-radius: 12px;
+    border-color: rgb(26, 26, 26);
 }
+
 .card-section {
     display: flex;
     flex-direction: column;
+
     .button-bckground {
         width: 2rem;
         height: 2rem;
@@ -50,13 +55,15 @@ function getPokemonImg(entryNumber: number): string {
         span {
             font-weight: bold;
             font-size: 22px;
-            color: rgb(109, 109, 109);
+            color: rgb(59, 58, 58);
         }
     }
+
     img {
         align-self: center;
         max-width: 200px;
     }
+
     .pokename {
         font-size: 24px;
         color: rgb(66, 66, 66);

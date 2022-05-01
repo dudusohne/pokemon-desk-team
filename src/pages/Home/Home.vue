@@ -8,44 +8,23 @@
       </div>
       <div class="searchBox">
         <h1>Search for a Pokemon</h1>
-        <input type="text" placeholder="Search..." />
-        <q-btn dense round icon="search" color="black">
+        <input type="text" placeholder="Search..." v-model="searchInput" />
+        <q-btn dense round icon="search" color="black" @click="filterPokemon(searchInput)">
         </q-btn>
       </div>
     </div>
     <div v-else class="pokeball">
       <img class="ashImg" src="../../assets/ash.png" alt="ash" />
-      <TeamCard
-        v-for="(pokemon, i) in list"
-        :key="i"
-        :pokemon="pokemon"
-        :entry_number="pokemon.id"
-        :pokemon_species="pokemon.name"
-        @click="handleRemove(pokemon.id)"
-      />
+      <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
+        :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
     </div>
     <div class="pokemonlist q-gutter-md">
-      <PokeCard
-        v-for="(pokemon, i) in pokeData"
-        :key="i"
-        :pokemon="pokemon"
-        :entry_number="pokemon.entry_number"
-        :pokemon_species="pokemon.pokemon_species.name.toUpperCase()"
-        @click="details(pokemon.pokemon_species.url)"
-      />
-      <Modal
-        v-model="modal"
-        :pokemon="pokemon"
-        :id="pokemon.id"
-        :name="pokemon.name"
-        :base_experience="pokemon.base_experience"
-        :height="pokemon.height"
-        :weight="pokemon.weight"
-        :abilities="pokemon.abilities"
-        :types="pokemon.types"
-        :description="pokemon.description"
-        :src="pokemon.entry_number"
-      >
+      <PokeCard v-for="(pokemon, i) in pokeData" :key="i" :pokemon="pokemon" :entry_number="pokemon.entry_number"
+        :pokemon_species="pokemon.pokemon_species.name.toUpperCase()" @click="details(pokemon.pokemon_species.url)" />
+      <Modal v-model="modal" :pokemon="pokemon" :id="pokemon.id" :name="pokemon.name"
+        :base_experience="pokemon.base_experience" :height="pokemon.height" :weight="pokemon.weight"
+        :abilities="pokemon.abilities" :types="pokemon.types" :description="pokemon.description"
+        :src="pokemon.entry_number">
         <template v-slot:modalButton>
           <q-btn color="green" label="ADICIONAR AO TIME" @click="addNewTeam()" />
           <q-btn color="black" label="FECHAR" v-close-popup />
@@ -56,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onBeforeMount } from "vue";
+import { ref, reactive, onBeforeMount, watch } from "vue";
 import Modal from "../../components/Modal/Modal.vue";
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
@@ -65,7 +44,7 @@ import TeamCard from '../../components/TeamCard/TeamCard.vue';
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
-const pokeData = ref<Pokemon>();
+const pokeData = ref<any>();
 const pokemon = reactive<Pokemon>({
   id: 0,
   name: "",
@@ -96,6 +75,8 @@ const pokemon = reactive<Pokemon>({
   color: '',
   description: '',
 });
+
+const searchInput = ref<any>()
 
 onBeforeMount(() => {
   pokemonList()
@@ -135,6 +116,15 @@ const pokemonList = async () => {
   pokeData.value = response.data.pokemon_entries;
 };
 
+function filterPokemon(searchInput: string) {
+  pokeData.value.filter((poke: any ) => {
+    if (poke.pokemon_species.name.toLowerCase().includes(searchInput.toLowerCase())) {
+      return poke;
+    }
+  });
+}
+
+
 /*
 * Handle's the pokemon details load/render
 */
@@ -171,6 +161,7 @@ async function details(url: string) {
   flex-direction: column;
   background-color: rgb(255, 187, 187);
   height: 100%;
+
   .pokeheader {
     display: flex;
     flex-direction: row;
@@ -178,14 +169,26 @@ async function details(url: string) {
     position: sticky;
     top: 0;
     height: 10vh;
+    width: 100%;
+
     padding: 0.2rem 2rem 0.2rem 2rem;
     background-color: rgb(236, 232, 222);
     z-index: 10;
     border-top: 3px double rgb(58, 59, 59);
     border-bottom: 3px double rgb(58, 59, 59);
+
+    @media only screen and (max-device-width: 480px) {
+      padding: 0 0 0 0.2rem;
+    }
+
     .logo {
       width: 9%;
+
+      @media only screen and (max-device-width: 480px) {
+        width: 30%;
+      }
     }
+
     .banner {
       display: flex;
       flex-direction: center;
@@ -201,13 +204,23 @@ async function details(url: string) {
         margin-left: 2rem;
         line-height: 1.2rem;
         letter-spacing: 0.1rem;
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 2.6rem;
+        }
       }
+
       h3 {
         font-size: 3.6rem;
         font-weight: bold;
         color: rgb(77, 72, 72);
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 2.6rem;
+        }
       }
     }
+
     .searchBox {
       display: flex;
       flex-direction: row;
@@ -218,11 +231,17 @@ async function details(url: string) {
       background-color: rgb(170, 80, 80);
       border-radius: 16px;
       padding: 0.9rem 2rem 0.9rem 2rem;
+
+      @media only screen and (max-device-width: 480px) {
+        display: none;
+      }
+
       h1 {
         font-size: 1.2rem;
         font-weight: bold;
         color: rgb(255, 255, 255);
       }
+
       input {
         width: 50%;
         border: none;
@@ -265,6 +284,7 @@ async function details(url: string) {
     margin-left: 1.9rem;
   }
 }
+
 .pokemonlist {
   display: flex;
   flex-wrap: wrap;
@@ -273,6 +293,7 @@ async function details(url: string) {
   z-index: 1;
   margin-top: 0.2px;
 }
+
 #modal {
   position: absolute;
   top: 20px;
