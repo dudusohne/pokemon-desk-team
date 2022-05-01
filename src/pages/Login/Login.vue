@@ -12,14 +12,14 @@
 
 <script setup lang="ts">
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { onMounted } from "vue";
+import { onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 
 const provider = new GoogleAuthProvider();
 
 const router = useRouter()
 
-onMounted(
+onBeforeMount(
   () => {
     getAuth().onAuthStateChanged(
       (user) => {
@@ -32,7 +32,6 @@ onMounted(
 );
 
 function Login() {
-
   const auth = getAuth();
   signInWithPopup(auth, provider)
     .then((result) => {

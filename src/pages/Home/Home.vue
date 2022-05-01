@@ -17,6 +17,7 @@
         <q-avatar>
           <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser?.photoURL">
         </q-avatar>
+        <q-icon name="logout" color="black" size="1.1rem" style="margin-left: 1rem; cursor: pointer" @click.prevent="signOut()" />
       </div>
     </div>
     <div v-else class="pokeball">
@@ -55,6 +56,7 @@ import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { useRoute } from "vue-router";
 import { getAuth } from "firebase/auth";
+import { router } from "../../router";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -132,6 +134,11 @@ const pokemonList = async () => {
   pokeData.value = response.data.pokemon_entries;
 };
 
+function signOut() {
+  auth.signOut();
+  router.push({ name: "Login" });
+}
+
 function filterPokemon(searchInput: string) {
   pokeData.value.filter((poke: any) => {
     if (poke.pokemon_species.name.toLowerCase().includes(searchInput.toLowerCase())) {
@@ -189,8 +196,7 @@ async function details(url: string) {
     padding: 0.2rem 2rem 0.2rem 2rem;
     background-color: rgb(24, 134, 207);
     z-index: 10;
-    border-top: 3px double rgb(58, 59, 59);
-    border-bottom: 3px double rgb(58, 59, 59);
+    border-bottom: 3px solid rgb(58, 59, 59);
 
     @media only screen and (max-device-width: 480px) {
       padding: 0 0 0 0.2rem;
