@@ -5,7 +5,7 @@
       <q-btn @click.prevent="Login()">
         login
       </q-btn>
-      <p>Faça login acima com sua conta google.</p>
+      <p>Faça login acima com sua conta GOOGLE.</p>
     </div>
   </div>
 </template>

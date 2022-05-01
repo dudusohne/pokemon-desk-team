@@ -20,7 +20,13 @@
       </div>
     </div>
     <div v-else class="pokeball">
-      <img class="ashImg" src="../../assets/ash.png" alt="ash" />
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <q-avatar>
+          <img :src="auth.currentUser?.photoURL">
+        </q-avatar>
+        <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
+      </div>
+      <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
       <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
         :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
     </div>
@@ -178,14 +184,13 @@ async function details(url: string) {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     position: sticky;
     top: 0;
-    height: 10vh;
+    height: 7vh;
     width: 100%;
 
     padding: 0.2rem 2rem 0.2rem 2rem;
-    background-color: rgb(236, 232, 222);
+    background-color: rgb(24, 134, 207);
     z-index: 10;
     border-top: 3px double rgb(58, 59, 59);
     border-bottom: 3px double rgb(58, 59, 59);
@@ -206,10 +211,13 @@ async function details(url: string) {
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: flex-end;
       width: 100%;
 
-      
-      
+      img {
+        border: 2px solid #333;
+      }
+
       span {
         font-size: 1.2rem;
         font-weight: bold;
@@ -290,6 +298,7 @@ async function details(url: string) {
 .pokeball {
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: sticky;
   top: 0;
   width: 100%;
@@ -298,7 +307,7 @@ async function details(url: string) {
   margin-bottom: 1rem;
   justify-content: flex-start;
   background-color: rgba(224, 219, 209, 0.932);
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 0 1rem 3rem;
   z-index: 10;
 
   p {
