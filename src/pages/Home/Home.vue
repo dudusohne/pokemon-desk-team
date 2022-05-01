@@ -15,14 +15,14 @@
       <div class="user-data">
         <span>{{ auth.currentUser?.displayName }}</span>
         <q-avatar>
-          <img :src="auth.currentUser?.photoURL">
+          <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser.photoURL">
         </q-avatar>
       </div>
     </div>
     <div v-else class="pokeball">
       <div style="display: flex; flex-direction: column; align-items: center">
         <q-avatar>
-          <img :src="auth.currentUser?.photoURL">
+          <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser.photoURL">
         </q-avatar>
         <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
       </div>
@@ -92,10 +92,7 @@ const pokemon = reactive<Pokemon>({
 
 // const searchInput = ref<any>()
 
-const route = useRoute()
-
 const auth = getAuth();
-console.log(auth.currentUser?.displayName)
 
 onBeforeMount(() => {
   pokemonList()
