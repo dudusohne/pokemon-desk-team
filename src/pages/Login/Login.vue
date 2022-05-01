@@ -30,7 +30,6 @@ onMounted(
     );
   }
 );
-)
 
 function Login() {
 
