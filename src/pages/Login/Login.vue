@@ -6,10 +6,11 @@
         <h1>POKE</h1>
         <h3>DESK</h3>
       </div>
-      
+      <q-separator color="black" />
       <q-btn @click.prevent="Login()">
         login
       </q-btn>
+      <q-separator color="black" />
       <p>Faça login acima com sua conta GOOGLE.</p>
     </div>
   </div>

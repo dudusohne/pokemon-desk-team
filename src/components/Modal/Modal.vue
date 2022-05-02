@@ -1,7 +1,7 @@
 <template>
     <q-dialog transition-show="slide-down" transition-hide="slide-down">
         <q-card class="text-white">
-            <div :style="{ 'background-color': props.pokemon.color, 'overflow': 'hidden' }">
+            <div :style="{ 'background-color': props.pokemon.color, overflow: 'hidden' }">
                 <img class="pokedeximgheader" src="../../assets/headerpokedex.png" alt="pokedex" />
                 <q-bar
                     style="display: flex; flex-direction: row; justify-content: space-between; align-items: center"

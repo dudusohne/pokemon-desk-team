@@ -42,6 +42,17 @@ function getPokemonImg(entryNumber: number): string {
     background: linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(198, 198, 198, 1) 93%);
     border-radius: 12px;
     border-color: rgb(26, 26, 26);
+
+     &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+        border-radius: 18px;
+        transition: 0.7s ease;
+    }
+
+    &:active {
+        background-color: red;
+    }
 }
 
 .card-section {

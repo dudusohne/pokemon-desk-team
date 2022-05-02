@@ -4,17 +4,10 @@
         <div class="footer">
             <span class="pokename">
                 {{
-                    props.pokemon.name?.toUpperCase()
+                        props.pokemon.name?.toUpperCase()
                 }}
             </span>
-            <q-btn
-                round
-                color="red"
-                size="sm"
-                text-color="white"
-                icon="fa fa-trash"
-                @click="props.pokemon.clicked"
-            />
+            <q-btn round color="red" size="sm" text-color="white" icon="fa fa-trash" @click="props.pokemon.clicked" />
         </div>
     </div>
 </template>
@@ -45,17 +38,23 @@ function getPokemonImg(id: number): string {
     border-radius: 12px;
     margin-left: 1rem;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     img {
         margin-top: -1.3rem;
         max-width: 120px;
         height: 120px;
     }
+
     .pokename {
         font-size: 14px;
         color: rgb(255, 255, 255);
         font-weight: bold;
         margin-right: 1rem;
     }
+
     .footer {
         display: flex;
         flex-direction: row;

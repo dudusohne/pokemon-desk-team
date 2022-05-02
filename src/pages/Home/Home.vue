@@ -6,12 +6,6 @@
         <h1>POKE</h1>
         <h3>DESK</h3>
       </div>
-      <!-- <div class="searchBox">
-        <h1>Search for a Pokemon</h1>
-        <input type="text" placeholder="Search..." v-model="searchInput" />
-        <q-btn dense round icon="search" color="black" @click="filterPokemon(searchInput)">
-        </q-btn>
-      </div> -->
       <div class="user-data">
         <span>{{ auth.currentUser?.displayName }}</span>
         <q-avatar>
@@ -143,14 +137,6 @@ function signOut() {
   router.push({ name: "Login" });
 }
 
-function filterPokemon(searchInput: string) {
-  pokeData.value.filter((poke: any) => {
-    if (poke.pokemon_species.name.toLowerCase().includes(searchInput.toLowerCase())) {
-      return poke;
-    }
-  });
-}
-
 /*
 * Handle's the pokemon details load/render
 */
@@ -200,7 +186,7 @@ async function details(url: string) {
     padding: 0.2rem 2rem 0.2rem 2rem;
     background-color: rgb(8, 16, 22);
     z-index: 10;
-    border-bottom: 3px solid rgb(58, 59, 59);
+    border-bottom: 3px solid rgb(10, 135, 173);
 
     @media only screen and (max-device-width: 480px) {
       padding: 0 0 0 0.2rem;
@@ -275,40 +261,6 @@ async function details(url: string) {
         @media only screen and (max-device-width: 480px) {
           font-size: 2.6rem;
         }
-      }
-    }
-
-    .searchBox {
-      display: flex;
-      flex-direction: row;
-      width: 70%;
-      align-items: center;
-      justify-content: space-between;
-      height: 80%;
-      background-color: rgb(170, 80, 80);
-      border-radius: 16px;
-      padding: 0.9rem 2rem 0.9rem 2rem;
-
-      @media only screen and (max-device-width: 480px) {
-        display: none;
-      }
-
-      h1 {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: rgb(255, 255, 255);
-      }
-
-      input {
-        width: 50%;
-        border: none;
-        background-color: rgb(255, 255, 255);
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: rgb(10, 17, 51);
-        margin-left: 1rem;
-        border-radius: 12px;
-        padding-left: 1rem;
       }
     }
   }
