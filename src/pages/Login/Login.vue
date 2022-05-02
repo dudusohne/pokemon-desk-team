@@ -2,6 +2,11 @@
   <div class="login">
     <div class="container">
       <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
+      <div class="banner">
+        <h1>POKE</h1>
+        <h3>DESK</h3>
+      </div>
+      
       <q-btn @click.prevent="Login()">
         login
       </q-btn>
@@ -85,11 +90,14 @@ function Login() {
     justify-content: center;
     height: 40vh;
 
-    width: 30vw;
+    width: 500px;
     background-color: rgb(236, 236, 236);
     border-radius: 40px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
 
+    @media (max-width: 768px) {
+      width: 60%;
+    }
 
     img {
       width: 50%;
@@ -120,6 +128,48 @@ function Login() {
       color: rgb(41, 52, 99);
       margin-top: 2rem;
       margin-bottom: 2rem;
+    }
+
+      .banner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      z-index: 2;
+      height: 2.5rem;
+      margin-top: 1.2rem;
+      margin-right: 1.6rem;
+
+      img {
+        width: 8%;
+        margin-left: 1.2rem;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        color: rgb(9, 9, 10);
+        margin-left: 2rem;
+        line-height: 0.6rem;
+        letter-spacing: -3px;
+        font-style: italic;
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 2.6rem;
+        }
+      }
+
+      h3 {
+        font-size: 4rem;
+        font-weight: bold;
+        color: rgb(59, 67, 100);
+        font-style: italic;
+
+        margin-top: 6rem;
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 2.6rem;
+        }
+      }
     }
   }
 }

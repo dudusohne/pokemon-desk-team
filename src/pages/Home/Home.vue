@@ -17,7 +17,8 @@
         <q-avatar>
           <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser?.photoURL">
         </q-avatar>
-        <q-icon name="logout" color="black" size="1.1rem" style="margin-left: 1rem; cursor: pointer" @click.prevent="signOut()" />
+        <q-icon name="logout" size="1.1rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+          @click.prevent="signOut()" />
       </div>
     </div>
     <div v-else class="pokeball">
@@ -27,7 +28,10 @@
         </q-avatar>
         <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
       </div>
-      <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
+
+        <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
+        <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
+
       <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
         :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
     </div>
@@ -181,8 +185,8 @@ async function details(url: string) {
 .home {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 187, 187);
   height: 100%;
+  background-color: rgb(29, 28, 28);
 
   .pokeheader {
     display: flex;
@@ -194,7 +198,7 @@ async function details(url: string) {
     width: 100%;
 
     padding: 0.2rem 2rem 0.2rem 2rem;
-    background-color: rgb(157, 202, 233);
+    background-color: rgb(8, 16, 22);
     z-index: 10;
     border-bottom: 3px solid rgb(58, 59, 59);
 
@@ -219,14 +223,15 @@ async function details(url: string) {
       width: 100%;
 
       img {
-        border: 2px solid #333;
-        
+        border: 2px solid rgb(209, 196, 196);
+
       }
 
       span {
         font-size: 1.2rem;
         font-weight: bold;
         font-family: 'Roboto', sans-serif;
+        color: rgb(209, 196, 196);
 
         margin-right: 1rem;
       }
@@ -240,13 +245,19 @@ async function details(url: string) {
       width: 91%;
       z-index: 10;
 
+      img {
+        width: 8%;
+        margin-left: 1.2rem;
+      }
+
       h1 {
-        font-size: 3.4rem;
+        font-size: 2rem;
         font-weight: bold;
-        color: rgb(10, 17, 51);
+        color: rgb(193, 195, 201);
         margin-left: 2rem;
         line-height: 0.6rem;
         letter-spacing: -3px;
+        font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
           font-size: 2.6rem;
@@ -254,9 +265,12 @@ async function details(url: string) {
       }
 
       h3 {
-        font-size: 3.4rem;
+        font-size: 2rem;
         font-weight: bold;
-        color: rgb(25, 29, 46);
+        color: rgb(239, 242, 255);
+        font-style: italic;
+
+        margin-top: 3rem;
 
         @media only screen and (max-device-width: 480px) {
           font-size: 2.6rem;
@@ -308,12 +322,17 @@ async function details(url: string) {
   top: 0;
   width: 100%;
   min-height: 100px;
-  padding: 0 0 0 1.2rem;
+  padding: 0 0 1 1.2rem;
   margin-bottom: 1rem;
   justify-content: flex-start;
   background-color: rgba(224, 219, 209, 0.932);
   padding: 1rem 0 1rem 3rem;
   z-index: 10;
+
+  img {
+    width: 5%;
+
+  }
 
   p {
     font-size: 1.1rem;
