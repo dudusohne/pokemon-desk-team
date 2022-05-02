@@ -31,32 +31,40 @@ onBeforeMount(
   }
 );
 
+
+
 function Login() {
   const auth = getAuth();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      // The signed-in user info.
-      const user: any = result?.user;
-
-      router.push({
-        name: "Home",
-        params: {
-          token: token,
-        },
-      });
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+  if (!!auth.currentUser) {
+    router.push({
+      name: "Home"
     });
+  } else {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        // The signed-in user info.
+        const user: any = result?.user;
+
+        router.push({
+          name: "Home",
+          params: {
+            token: token,
+          },
+        });
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
 }
 </script>
 
@@ -77,14 +85,14 @@ function Login() {
     align-items: center;
     justify-content: center;
     height: 40vh;
-    
+
     width: 30vw;
     background-color: rgb(236, 236, 236);
     border-radius: 40px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
-    
 
-    img { 
+
+    img {
       width: 50%;
     }
 
