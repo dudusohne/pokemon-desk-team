@@ -23,8 +23,9 @@
         <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
       </div>
 
-        <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
-        <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
+      <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
+      <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
+      <button @click="saveTeam()">save team</button>
 
       <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
         :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
@@ -55,6 +56,7 @@ import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { useRoute } from "vue-router";
 import { getAuth } from "firebase/auth";
 import { router } from "../../router";
+import { getDatabase, ref as Ref, set } from "firebase/database";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -114,6 +116,38 @@ const addNewTeam = () => {
     description: pokemon.description,
   });
   modal.value = false;
+}
+
+function saveTeam() {
+  const user = auth.currentUser;
+  const userId = user?.uid;
+  const userEmail = user?.email;
+  const userName = user?.displayName;
+  const userPhoto = user?.photoURL;
+  const userTeam = list;
+
+  if (userTeam.length < 5) {
+    alert("Please select 5 pokemons before save!")
+    return
+
+  } else {
+
+    const db = getDatabase();
+    try {
+      set(Ref(db, 'users/' + userId), {
+        username: userName,
+        email: userEmail,
+        profile_picture: userPhoto,
+        team: userTeam
+      });
+
+      alert('TEAM SAVED')
+    } catch (e) {
+      console.log(e);
+
+    }
+  }
+
 }
 
 function handleRemove(id: number) {

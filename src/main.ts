@@ -6,7 +6,7 @@ import { router } from './router'
 //firebase imports
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from './services/firebase';
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
 
 // Import icon libraries
 import '@quasar/extras/roboto-font/roboto-font.css'
@@ -26,6 +26,6 @@ myApp.use(Quasar, {
 })
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const database = getDatabase(app);
 
 myApp.use(router).mount('#app')

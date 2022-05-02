@@ -40,8 +40,6 @@ onBeforeMount(
   }
 );
 
-
-
 function Login() {
   const auth = getAuth();
   if (!!auth.currentUser) {
