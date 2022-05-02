@@ -3,10 +3,13 @@
     <div class="container">
       <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
       <div class="banner">
-        <h1>POKE</h1>
-        <h3>DESK</h3>
+        <img class="logo" src="../../assets/ash.png" alt="pokemon" />
+        <div style="display: flex; flex-direction: row">
+          <h1>POKE</h1>
+          <h3>DESK</h3>
+        </div>
       </div>
-      <q-separator color="black" />
+      <q-separator color="black" inset />
       <q-btn @click.prevent="Login()">
         login
       </q-btn>
@@ -81,26 +84,32 @@ function Login() {
   align-items: center;
   justify-content: center;
 
-  background-image: url("../../assets/background-img.png");
+  background: linear-gradient(30deg, rgb(14, 27, 37) 0%, rgb(8, 16, 22) 93%);
   background-size: cover;
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 40vh;
+    justify-content: space-between;
+    height: 47vh;
 
-    width: 500px;
+    width: 470px;
     background-color: rgb(236, 236, 236);
     border-radius: 40px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
+
+    &:hover {
+      border-radius: 32px;
+      transition: 0.5s ease-in-out;
+    }
 
     @media (max-width: 768px) {
       width: 60%;
     }
 
     img {
+      margin-top: -3rem;
       width: 50%;
     }
 
@@ -115,10 +124,10 @@ function Login() {
       font-weight: bold;
       cursor: pointer;
 
-      margin-top: 4rem;
+      margin-top: -3rem;
 
       &:hover {
-        background-color: #2c2c2c;
+        background-color: #194996;
         transition: 0.3s;
       }
     }
@@ -126,48 +135,45 @@ function Login() {
     p {
       font-size: 18px;
       font-weight: bold;
-      color: rgb(41, 52, 99);
-      margin-top: 2rem;
+      color: rgba(135, 139, 158, 0.911);
       margin-bottom: 2rem;
     }
 
-      .banner {
+    .banner {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       z-index: 2;
-      height: 2.5rem;
-      margin-top: 1.2rem;
-      margin-right: 1.6rem;
+      margin-top: 3.2rem;
 
       img {
-        width: 8%;
-        margin-left: 1.2rem;
+        width: 50%;
+        border-radius: 12px;
       }
 
       h1 {
         font-size: 3.5rem;
         font-weight: bold;
-        color: rgb(9, 9, 10);
-        margin-left: 2rem;
-        line-height: 0.6rem;
+        color: rgb(26, 26, 32);
         letter-spacing: -3px;
         font-style: italic;
 
-        @media only screen and (max-device-width: 480px) {
+        @media only screen and (max-width: 480px) {
           font-size: 2.6rem;
         }
+
+        margin-top: -2.4rem;
       }
 
       h3 {
         font-size: 4rem;
         font-weight: bold;
         color: rgb(59, 67, 100);
-        font-style: italic;
+        // font-style: italic;
 
-        margin-top: 6rem;
+        margin-top: -0.4rem;
 
-        @media only screen and (max-device-width: 480px) {
+        @media only screen and (max-width: 480px) {
           font-size: 2.6rem;
         }
       }
