@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const firebaseConfig: any = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_PROJECT_ID,
