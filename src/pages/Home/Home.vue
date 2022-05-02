@@ -194,7 +194,7 @@ async function details(url: string) {
     width: 100%;
 
     padding: 0.2rem 2rem 0.2rem 2rem;
-    background-color: rgb(24, 134, 207);
+    background-color: rgb(157, 202, 233);
     z-index: 10;
     border-bottom: 3px solid rgb(58, 59, 59);
 
@@ -203,7 +203,8 @@ async function details(url: string) {
     }
 
     .logo {
-      width: 9%;
+      width: 11%;
+      margin-top: 1rem;
 
       @media only screen and (max-device-width: 480px) {
         width: 30%;
@@ -244,8 +245,8 @@ async function details(url: string) {
         font-weight: bold;
         color: rgb(10, 17, 51);
         margin-left: 2rem;
-        line-height: 1.2rem;
-        letter-spacing: 0.1rem;
+        line-height: 0.6rem;
+        letter-spacing: -3px;
 
         @media only screen and (max-device-width: 480px) {
           font-size: 2.6rem;
@@ -253,9 +254,9 @@ async function details(url: string) {
       }
 
       h3 {
-        font-size: 3.6rem;
+        font-size: 3.4rem;
         font-weight: bold;
-        color: rgb(77, 72, 72);
+        color: rgb(25, 29, 46);
 
         @media only screen and (max-device-width: 480px) {
           font-size: 2.6rem;

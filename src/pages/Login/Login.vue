@@ -46,7 +46,6 @@ function Login() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         // The signed-in user info.
-        const user: any = result?.user;
 
         router.push({
           name: "Home",
