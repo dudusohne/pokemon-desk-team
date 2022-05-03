@@ -2,8 +2,8 @@
   <div class="login">
     <div class="container">
       <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
+      <img class="ash" src="../../assets/ash.png" alt="pokemon" />
       <div class="banner">
-        <img class="logo" src="../../assets/ash.png" alt="pokemon" />
         <div style="display: flex; flex-direction: row">
           <h1>POKE</h1>
           <h3>DESK</h3>
@@ -49,10 +49,8 @@ function Login() {
   } else {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
-        // The signed-in user info.
 
         router.push({
           name: "Home",
@@ -98,7 +96,7 @@ function Login() {
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
 
     &:hover {
-      border-radius: 32px;
+      opacity: 0.9;
       transition: 0.5s ease-in-out;
     }
 
@@ -137,42 +135,47 @@ function Login() {
       margin-bottom: 2rem;
     }
 
+    .logo { 
+      z-index: 3;
+    }
+
+    .ash { 
+      width: 100%;
+      height: 13rem;
+      overflow: hidden;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+
+    }
+
     .banner {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 2;
-      margin-top: 3.2rem;
-
-      img {
-        width: 50%;
-        border-radius: 12px;
-      }
+      justify-content: center;
+      width: 91%;
+      z-index: 10;
 
       h1 {
-        font-size: 3.5rem;
+        font-size: 2.3rem;
         font-weight: bold;
-        color: rgb(26, 26, 32);
+        color: rgb(29, 31, 34);
         letter-spacing: -3px;
         font-style: italic;
 
-        @media only screen and (max-width: 480px) {
-          font-size: 2.6rem;
+        @media only screen and (max-device-width: 480px) {
+          font-size: 1.3rem;
         }
-
-        margin-top: -2.4rem;
       }
 
       h3 {
-        font-size: 4rem;
+        font-size: 2.4rem;
         font-weight: bold;
-        color: rgb(59, 67, 100);
-        // font-style: italic;
+        color: rgb(102, 102, 102);
+        font-style: italic;
 
-        margin-top: -0.4rem;
+        margin-top: 3.2rem;
 
-        @media only screen and (max-width: 480px) {
-          font-size: 2.6rem;
+        @media only screen and (max-device-width: 480px) {
+          font-size: 1.2rem;
         }
       }
     }

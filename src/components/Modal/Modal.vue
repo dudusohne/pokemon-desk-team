@@ -81,7 +81,6 @@
                             <div
                                 style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;"
                             >
-                                <p style="color: rgb(189, 189, 189)">DESCRIPTION:</p>
                                 <p style="color: rgb(223, 223, 223)">{{ props.pokemon.description }}</p>
                             </div>
                         </q-btn>

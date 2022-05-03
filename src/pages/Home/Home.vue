@@ -7,9 +7,10 @@
         <h3>DESK</h3>
       </div>
       <div style="display: flex; flex-direction: row">
-        <q-icon name="home" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
-          @click.prevent="router.push('/')" />
-        <q-icon name="wifi" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+        <q-icon :class="isActiveMenu('/home')" name="home" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+          @click.prevent="router.push('/home')" />
+        <q-icon :class="isActiveMenu('/stats')" name="article" size="1.6rem"
+          style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
           @click.prevent="router.push('/stats')" />
       </div>
       <div class="user-data">
@@ -67,7 +68,7 @@ import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -104,6 +105,7 @@ const pokemon = reactive<Pokemon>({
 });
 
 const router = useRouter()
+const route = useRoute()
 
 const auth = getAuth();
 
@@ -220,6 +222,12 @@ async function details(url: string) {
     console.log('catch erro: ', err);
   }
 };
+
+function isActiveMenu(currentPath: string): string | void {
+  if (currentPath === route.path) {
+    return 'is-active'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -247,12 +255,18 @@ async function details(url: string) {
       padding: 0 0 0 0.2rem;
     }
 
+    .is-active {
+      border: 1px solid rgba(255, 255, 255, 0.336);
+      background-color: rgb(10, 135, 173);
+      border-radius: 7px;
+    }
+
     .logo {
       width: 11%;
       margin-top: 1rem;
 
       @media only screen and (max-device-width: 480px) {
-        width: 30%;
+        display: none;
       }
     }
 
@@ -275,6 +289,10 @@ async function details(url: string) {
         color: rgb(209, 196, 196);
 
         margin-right: 1rem;
+
+        @media only screen and (max-device-width: 480px) {
+          display: none;
+        }
       }
     }
 
@@ -289,6 +307,10 @@ async function details(url: string) {
       img {
         width: 8%;
         margin-left: 1.2rem;
+
+        @media only screen and (max-device-width: 480px) {
+          display: none;
+        }
       }
 
       h1 {
@@ -296,12 +318,11 @@ async function details(url: string) {
         font-weight: bold;
         color: rgb(193, 195, 201);
         margin-left: 2rem;
-        line-height: 0.6rem;
         letter-spacing: -3px;
         font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 2.6rem;
+          font-size: 1.3rem;
         }
       }
 
@@ -314,7 +335,7 @@ async function details(url: string) {
         margin-top: 3rem;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 2.6rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -324,7 +345,7 @@ async function details(url: string) {
 .pokeball {
   display: flex;
   flex-direction: row;
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   min-height: 100px;

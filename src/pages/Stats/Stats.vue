@@ -6,10 +6,12 @@
         <h1>POKE</h1>
         <h3>DESK</h3>
       </div>
-       <div style="display: flex; flex-direction: row">
-        <q-icon name="home" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+      <div style="display: flex; flex-direction: row">
+        <q-icon :class="isActiveMenu('/home')" name="home" size="1.6rem"
+          style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
           @click.prevent="router.push('/home')" />
-        <q-icon name="wifi" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+        <q-icon :class="isActiveMenu('/stats')" name="article" size="1.6rem"
+          style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
           @click.prevent="router.push('/stats')" />
       </div>
       <div class="user-data">
@@ -23,12 +25,15 @@
     </div>
     <div class="container">
       <span class="stats-title">RANKING</span>
-      <div :key="stats.power" v-for="stats in statsData" class="stats-list">
+      <div :key="i" v-for="(stats, i) in statsData" class="stats-list">
         <q-avatar>
           <img :src="stats.photo" v-if="stats.photo">
         </q-avatar>
         <span>{{ stats.name }}</span>
-        <p v-if="!!stats.power">{{ stats.power}} pts</p>
+        <q-separator vertical style="margin-right: 0.7rem;" color="cyan" />
+        <img v-for="team in stats.team" :src="getPokemonImg(team.id)" alt="image" />
+        <q-separator vertical style="margin-left: 0.7rem;" color="cyan" />
+        <p v-if="!!stats.power">{{ stats.power }} pts</p>
       </div>
     </div>
   </div>
@@ -38,18 +43,20 @@
 import { ref } from "vue";
 import { getDatabase, ref as Ref, get, child } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const statsData = ref()
 
 const auth = getAuth();
 
 const router = useRouter()
+const route = useRoute()
 
 const dbRef = Ref(getDatabase());
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     statsData.value = snapshot.val();
+
   } else {
     console.log("No data available");
   }
@@ -60,6 +67,20 @@ get(child(dbRef, `users/`)).then((snapshot) => {
 function signOut() {
   auth.signOut();
   router.push({ name: "Login" });
+}
+
+function getPokemonImg(id: number): string {
+  var str = "" + id;
+  var pad = "000";
+  const ans = pad.substring(0, pad.length - str.length) + str;
+  const url = `https://raw.githubusercontent.com/oscarcz7/poke_api/master/src/assets/pokemon/${ans}.png`;
+  return url;
+}
+
+function isActiveMenu(currentPath: string): string | void {
+  if (currentPath === route.path) {
+    return 'is-active'
+  }
 }
 </script>
 
@@ -90,12 +111,22 @@ function signOut() {
       padding: 0 0 0 0.2rem;
     }
 
+    .is-active {
+      border: 1px solid rgba(255, 255, 255, 0.336);
+      background-color: rgb(10, 135, 173);
+      border-radius: 7px;
+    }
+
     .logo {
       width: 11%;
       margin-top: 1rem;
 
       @media only screen and (max-device-width: 480px) {
-        width: 30%;
+        display: none;
+      }
+
+      @media screen and (max-width: 480px) {
+        display: none;
       }
     }
 
@@ -108,7 +139,6 @@ function signOut() {
 
       img {
         border: 2px solid rgb(209, 196, 196);
-
       }
 
       span {
@@ -118,6 +148,10 @@ function signOut() {
         color: rgb(209, 196, 196);
 
         margin-right: 1rem;
+
+        @media only screen and (max-device-width: 480px) {
+          display: none;
+        }
       }
     }
 
@@ -132,6 +166,10 @@ function signOut() {
       img {
         width: 8%;
         margin-left: 1.2rem;
+
+        @media only screen and (max-device-width: 480px) {
+          display: none;
+        }
       }
 
       h1 {
@@ -139,12 +177,15 @@ function signOut() {
         font-weight: bold;
         color: rgb(193, 195, 201);
         margin-left: 2rem;
-        line-height: 0.6rem;
         letter-spacing: -3px;
         font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 2.6rem;
+          font-size: 1.3rem;
+        }
+
+        @media screen and (max-width: 500px) {
+          font-size: 1.2rem;
         }
       }
 
@@ -157,7 +198,11 @@ function signOut() {
         margin-top: 3rem;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 2.6rem;
+          font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 500px) {
+          font-size: 1.2rem;
         }
       }
     }
@@ -187,7 +232,7 @@ function signOut() {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
 
       margin-top: 0.4rem;
 
@@ -196,6 +241,11 @@ function signOut() {
       background: linear-gradient(30deg, rgb(36, 35, 35) 0%, rgb(26, 25, 25) 93%);
 
       padding: 0.3rem 0.6rem 0.3rem 0.3rem;
+
+      img {
+        width: 58px;
+
+      }
 
       span {
         margin-left: 1rem;
@@ -210,12 +260,8 @@ function signOut() {
       p {
         font-weight: bold;
         font-size: 1.3rem;
-        margin: 0;
-        color: rgb(0, 247, 255);
-      }
-
-      img {
-        border: 1px solid white;
+        margin: 0 0 0 1rem;
+        color: cyan;
       }
     }
   }
