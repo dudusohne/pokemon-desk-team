@@ -6,6 +6,12 @@
         <h1>POKE</h1>
         <h3>DESK</h3>
       </div>
+      <div style="display: flex; flex-direction: row">
+        <q-icon name="home" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+          @click.prevent="router.push('/')" />
+        <q-icon name="wifi" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+          @click.prevent="router.push('/stats')" />
+      </div>
       <div class="user-data">
         <span>{{ auth.currentUser?.displayName }}</span>
         <q-avatar>
@@ -23,12 +29,17 @@
         <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
       </div>
 
-      <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
-      <span style="font-weight: bold; font-size: 1.7rem; margin-left: 3rem">MY <br> TEAM:</span>
-      <button @click="saveTeam()">save team</button>
+      <q-separator vertical style="margin-left: 1rem" />
+
+      <div style="display: flex; flex-direction: column; align-items: center; width: 80px; margin-left: 1rem">
+        <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
+        <span style="font-weight: bold; font-size: 1rem;">MY TEAM:</span>
+      </div>
 
       <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
         :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
+
+      <q-btn color="green" label="SAVE TEAM" @click="saveTeam()" v-if="list.length > 4" style="margin-left: 2rem" />
     </div>
     <div class="pokemonlist q-gutter-md">
       <PokeCard v-for="(pokemon, i) in pokeData" :key="i" :pokemon="pokemon" :entry_number="pokemon.entry_number"
@@ -47,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onBeforeMount, watch } from "vue";
+import { ref, reactive, onBeforeMount } from "vue";
 import { getDatabase, ref as Ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
@@ -56,7 +67,7 @@ import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
-import { router } from "../../router";
+import { useRouter } from "vue-router";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -92,6 +103,8 @@ const pokemon = reactive<Pokemon>({
   description: '',
 });
 
+const router = useRouter()
+
 const auth = getAuth();
 
 onBeforeMount(() => {
@@ -122,24 +135,34 @@ function saveTeam() {
   const userEmail: string | any = user?.email;
   const userName = user?.displayName;
   const userPhoto = user?.photoURL;
-  const userTeam = list;
+  const userTeam: any = list;
+
+  const power = ref()
+
+  power.value = userTeam.reduce((result: any, item: any) => {
+    return result + item?.base_experience
+  }, 0)
+
+  console.log('power: ', power.value)
 
   if (userTeam.length < 5) {
     alert("Please select 5 pokemons before save!")
     return
 
-  } else {  
+  } else {
 
     const db = getDatabase();
 
     try {
       set(Ref(db, `users/` + userId), {
-          email: userEmail,
-          name: userName,
-          photo: userPhoto,
-          team: userTeam
+        email: userEmail,
+        name: userName,
+        photo: userPhoto,
+        team: userTeam,
+        power: power.value
       });
 
+      router.push('/stats')
       alert('TEAM SAVED')
     } catch (e) {
       console.log(e);
@@ -301,21 +324,18 @@ async function details(url: string) {
 .pokeball {
   display: flex;
   flex-direction: row;
-  align-items: center;
   position: sticky;
   top: 0;
   width: 100%;
   min-height: 100px;
   padding: 0 0 1 1.2rem;
-  margin-bottom: 1rem;
   justify-content: flex-start;
   background-color: rgba(224, 219, 209, 0.932);
   padding: 1rem 0 1rem 3rem;
   z-index: 10;
 
   img {
-    width: 5%;
-
+    width: 90%;
   }
 
   p {

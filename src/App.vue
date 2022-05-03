@@ -3,22 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from "vue";
-import Home from '../src/pages/Home/Home.vue';
-import { useRouter, useRoute } from 'vue-router'
-import firebase from 'firebase/auth';
-
-const router = useRouter();
-const route = useRoute();
-// onBeforeMount(() => {
-//   firebase.auth().onAuthStateChanged(user => {
-//     if (user) {
-//       router.push('/home');
-//     } else {
-//       router.push('/');
-//     }
-//   });
-// })
 </script>
 
 <style>
@@ -27,5 +11,7 @@ const route = useRoute();
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background: linear-gradient(30deg, rgb(14, 27, 37) 0%, rgb(8, 16, 22) 93%);
+  height: 100vh;
 }
 </style>
