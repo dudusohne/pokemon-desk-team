@@ -57,6 +57,7 @@ import { useRoute } from "vue-router";
 import { getAuth } from "firebase/auth";
 import { router } from "../../router";
 import { getDatabase, ref as Ref, set } from "firebase/database";
+import { AnyPtrRecord } from "dns";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -120,8 +121,8 @@ const addNewTeam = () => {
 
 function saveTeam() {
   const user = auth.currentUser;
-  const userId = user?.uid;
-  const userEmail = user?.email;
+  const userId: any = user?.uid;
+  const userEmail: string | any = user?.email;
   const userName = user?.displayName;
   const userPhoto = user?.photoURL;
   const userTeam = list;
@@ -130,21 +131,21 @@ function saveTeam() {
     alert("Please select 5 pokemons before save!")
     return
 
-  } else {
+  } else {  
 
     const db = getDatabase();
+
     try {
-      set(Ref(db, 'users/' + userId), {
-        username: userName,
-        email: userEmail,
-        profile_picture: userPhoto,
-        team: userTeam
+      set(Ref(db, `users/` + userId), {
+          email: userEmail,
+          name: userName,
+          photo: userPhoto,
+          team: userTeam
       });
 
       alert('TEAM SAVED')
     } catch (e) {
       console.log(e);
-
     }
   }
 
