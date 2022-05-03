@@ -48,16 +48,15 @@
 
 <script setup lang="ts">
 import { ref, reactive, onBeforeMount, watch } from "vue";
+import { getDatabase, ref as Ref, set } from "firebase/database";
+import { getAuth } from "firebase/auth";
+
 import Modal from "../../components/Modal/Modal.vue";
-import { Pokemon } from '../../interface/types';
-import api from '../../services/api';
 import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
-import { useRoute } from "vue-router";
-import { getAuth } from "firebase/auth";
+import { Pokemon } from '../../interface/types';
+import api from '../../services/api';
 import { router } from "../../router";
-import { getDatabase, ref as Ref, set } from "firebase/database";
-import { AnyPtrRecord } from "dns";
 
 const modal = ref(false);
 const list = reactive<Pokemon[]>([]);
@@ -92,8 +91,6 @@ const pokemon = reactive<Pokemon>({
   color: '',
   description: '',
 });
-
-// const searchInput = ref<any>()
 
 const auth = getAuth();
 
