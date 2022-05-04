@@ -4,7 +4,7 @@
       <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
       <img class="ash" src="../../assets/ash.png" alt="pokemon" />
       <div class="banner">
-        <div style="display: flex; flex-direction: row">
+        <div style="display: flex; flex-direction: row; height: 88px;">
           <h1>POKE</h1>
           <h3>DESK</h3>
         </div>
@@ -119,8 +119,6 @@ function Login() {
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-
-      margin-top: -3rem;
 
       &:hover {
         background-color: #194996;
