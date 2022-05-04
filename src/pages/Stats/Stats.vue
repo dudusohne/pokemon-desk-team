@@ -216,13 +216,13 @@ function isActiveMenu(currentPath: string): string | void {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     padding: 1rem 1rem 4rem 1rem;
 
     margin-top: 2rem;
 
-    width: 70%;
+    width: 50%;
 
     .stats-title {
       font-size: 2rem;
@@ -239,6 +239,7 @@ function isActiveMenu(currentPath: string): string | void {
       justify-content: space-between;
 
       margin-top: 0.4rem;
+      margin-left: 9rem;
 
       border-radius: 12px;
       border: 1px solid #333;
