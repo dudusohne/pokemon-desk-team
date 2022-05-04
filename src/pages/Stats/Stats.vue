@@ -25,7 +25,7 @@
     </div>
     <div class="container">
       <span class="stats-title">RANKING</span>
-      <div :key="i" v-for="(stats, i) in statsData" class="stats-list">
+      <div :key="i" v-for="(stats, i) in resultData" class="stats-list">
         <q-avatar>
           <img :src="stats.photo" v-if="stats.photo">
         </q-avatar>
@@ -45,7 +45,7 @@ import { getDatabase, ref as Ref, get, child } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { useRoute, useRouter } from "vue-router";
 
-const statsData = ref()
+const resultData = ref()
 
 const auth = getAuth();
 
@@ -55,7 +55,11 @@ const route = useRoute()
 const dbRef = Ref(getDatabase());
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
-    statsData.value = snapshot.val();
+    let data = snapshot.val()    
+    resultData.value = Object.values(data)
+    resultData.value.sort((a: any, b: any) => {
+      return a.power - b.power
+    }).reverse()
 
   } else {
     console.log("No data available");
