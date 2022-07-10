@@ -7,7 +7,10 @@
                         <span>{{ props.pokemon.entry_number }}</span>
                     </q-btn>
                 </div>
-                <img :src="getPokemonImg(props.pokemon.entry_number)" alt="image" />
+                <div style="align-items: center; justify-content: center; height: 160px; padding-top: 2rem" v-if="!props.pokemon.entry_number">
+                    <q-spinner-dots color="black" loading="true" size="64" />
+                </div>
+                <img :src="getPokemonImg(props.pokemon.entry_number)" alt="image" v-else />
                 <p class="pokename">
                     {{
                             props.pokemon.pokemon_species.name?.toUpperCase()
@@ -42,6 +45,7 @@ function getPokemonImg(entryNumber: number): string {
     background: linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(198, 198, 198, 1) 93%);
     border-radius: 12px;
     border-color: rgb(26, 26, 26);
+    min-width: 170px;
 
      &:hover {
         cursor: pointer;
