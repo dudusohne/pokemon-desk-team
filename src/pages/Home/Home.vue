@@ -7,10 +7,11 @@
         <h3>DESK</h3>
       </div>
       <div style="display: flex; flex-direction: row">
-        <q-icon :class="isActiveMenu('/home')" name="home" size="1.6rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+        <q-btn push :class="isActiveMenu('/home')" icon="home" label="HOME" stack color="cyan"
+          style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
           @click.prevent="router.push('/home')" />
-        <q-icon :class="isActiveMenu('/stats')" name="article" size="1.6rem"
-          style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
+        <q-btn push :class="isActiveMenu('/stats')" icon="article" label="RANK" stack color="white" text-color="black"
+          style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
           @click.prevent="router.push('/stats')" />
       </div>
       <div class="user-data">
@@ -256,8 +257,7 @@ function isActiveMenu(currentPath: string): string | void {
     }
 
     .is-active {
-      border: 1px solid rgba(255, 255, 255, 0.336);
-      background-color: rgb(10, 135, 173);
+      background-color: orange;
       border-radius: 7px;
     }
 
