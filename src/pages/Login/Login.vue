@@ -4,17 +4,19 @@
       <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
       <img class="ash" src="../../assets/ash.png" alt="pokemon" />
       <div class="banner">
-        <div style="display: flex; flex-direction: row; height: 88px;">
+        <div style="display: flex; flex-direction: row; height: 8rem;">
           <h1>POKE</h1>
           <h3>DESK</h3>
         </div>
+        <p style="font-size: 1rem; font-weight: bold; font-style: italic; font-variant: small-caps;">monte seu time</p>
       </div>
-      <q-separator color="black" inset />
+      <hr />
       <q-btn @click.prevent="Login()">
         login
       </q-btn>
       <q-separator color="black" />
-      <p>Faça login acima com sua conta GOOGLE.</p>
+      <p style="font-size: 1rem;">Faça login acima com sua conta GOOGLE.</p>
+      <span style="font-size: 1rem; font-weight: bold; font-style: italic; font-variant: small-caps; color: gray">é gratuíto</span>
     </div>
   </div>
 </template>
@@ -91,7 +93,7 @@ function Login() {
     height: 47vh;
 
     width: 470px;
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(255, 255, 255);
     border-radius: 40px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
 
@@ -100,8 +102,9 @@ function Login() {
       transition: 0.5s ease-in-out;
     }
 
-    @media (max-width: 768px) {
-      width: 60%;
+    @media (max-width: 468px) {
+      width: 90%;
+      height: 39vh;
     }
 
     img {
@@ -133,24 +136,35 @@ function Login() {
       margin-bottom: 2rem;
     }
 
-    .logo { 
+    .logo {
       z-index: 3;
     }
 
-    .ash { 
+    .ash {
       width: 100%;
-      height: 13rem;
-      overflow: hidden;
+      height: 18rem;
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
 
+      @media only screen and (max-device-width: 480px) {
+        width: 100%;
+        height: 10rem;
+      }
     }
 
     .banner {
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       width: 91%;
       z-index: 10;
+      height: 8rem;
+
+      @media only screen and (max-device-width: 480px) {
+        margin-top: 2.6rem;
+        height: 2rem;
+      }
 
       h1 {
         font-size: 2.3rem;
@@ -160,7 +174,8 @@ function Login() {
         font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 1.3rem;
+          font-size: 2.3rem;
+          line-height: 0;
         }
       }
 
@@ -169,11 +184,12 @@ function Login() {
         font-weight: bold;
         color: rgb(102, 102, 102);
         font-style: italic;
-
-        margin-top: 3.2rem;
+        margin-top: 4 .1rem;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 1.2rem;
+          margin-top: 2.1rem;
+          font-size: 1.9rem;
+          line-height: 0;
         }
       }
     }
