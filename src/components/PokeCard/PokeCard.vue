@@ -7,7 +7,8 @@
                         <span>{{ props.pokemon.entry_number }}</span>
                     </q-btn>
                 </div>
-                <div style="align-items: center; justify-content: center; height: 160px; padding-top: 2rem" v-if="!props.pokemon.entry_number">
+                <div style="align-items: center; justify-content: center; height: 160px; padding-top: 2rem"
+                    v-if="!props.pokemon.entry_number">
                     <q-spinner-dots color="black" loading="true" size="64" />
                 </div>
                 <img :src="getPokemonImg(props.pokemon.entry_number)" alt="image" v-else />
@@ -47,7 +48,7 @@ function getPokemonImg(entryNumber: number): string {
     border-color: rgb(26, 26, 26);
     min-width: 170px;
 
-     &:hover {
+    &:hover {
         cursor: pointer;
         opacity: 0.6;
         border-radius: 18px;
@@ -56,6 +57,10 @@ function getPokemonImg(entryNumber: number): string {
 
     &:active {
         background-color: red;
+    }
+
+    @media (max-width: 468px) {
+        width: 130px;
     }
 }
 
@@ -77,6 +82,10 @@ function getPokemonImg(entryNumber: number): string {
     img {
         align-self: center;
         max-width: 200px;
+
+        @media (max-width: 468px) {
+            max-width: 120px;
+        }
     }
 
     .pokename {
@@ -84,6 +93,10 @@ function getPokemonImg(entryNumber: number): string {
         color: rgb(66, 66, 66);
         align-self: center;
         font-weight: bold;
+
+        @media (max-width: 468px) {
+            font-size: 16px;
+        }
     }
 }
 </style>
