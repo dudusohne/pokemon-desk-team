@@ -38,6 +38,11 @@ function getPokemonImg(id: number): string {
     border-radius: 12px;
     margin-left: 1rem;
 
+    @media only screen and (max-device-width: 480px) {
+        height: 18px;
+        margin-left: 6px;
+    }
+
     &:hover {
         cursor: pointer;
     }
@@ -46,6 +51,12 @@ function getPokemonImg(id: number): string {
         margin-top: -1.3rem;
         max-width: 120px;
         height: 120px;
+
+        @media only screen and (max-device-width: 480px) {
+            margin-top: 0.1rem;
+            height: 70px;
+            max-width: 70px;
+        }
     }
 
     .pokename {
@@ -53,6 +64,10 @@ function getPokemonImg(id: number): string {
         color: rgb(255, 255, 255);
         font-weight: bold;
         margin-right: 1rem;
+
+        @media only screen and (max-device-width: 480px) {
+            display: none;
+        }
     }
 
     .footer {
@@ -63,6 +78,10 @@ function getPokemonImg(id: number): string {
         background-color: rgb(54, 54, 54);
         border-radius: 2px;
         padding: 8px;
+
+        @media only screen and (max-device-width: 480px) {
+            padding: 3px;
+        }
     }
 }
 </style>

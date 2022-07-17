@@ -24,24 +24,24 @@
       </div>
     </div>
     <div v-else class="pokeball">
-      <div style="display: flex; flex-direction: column; align-items: center">
-        <q-avatar>
+      <div class="user-data-wrapper">
+        <q-avatar class="user-image">
           <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser?.photoURL">
         </q-avatar>
-        <span style="font-weight: bold; font-size: 1rem">{{ auth.currentUser?.displayName }}</span>
+        <span class="username">{{ auth.currentUser?.displayName }}</span>
       </div>
 
       <q-separator vertical style="margin-left: 1rem" />
 
-      <div style="display: flex; flex-direction: column; align-items: center; width: 80px; margin-left: 1rem">
+      <div style="display: flex; flex-direction: column; align-items: center;">
         <img class="pokedex" src="../../assets/pokedex.png" alt="pokedex" />
-        <span style="font-weight: bold; font-size: 1rem;">MY TEAM:</span>
+        <span class="my-team">MY TEAM:</span>
       </div>
 
       <TeamCard v-for="(pokemon, i) in list" :key="i" :pokemon="pokemon" :entry_number="pokemon.id"
         :pokemon_species="pokemon.name" @click="handleRemove(pokemon.id)" />
 
-      <q-btn color="green" label="SAVE TEAM" @click="saveTeam()" v-if="list.length > 4" style="margin-left: 2rem" />
+      <q-btn color="green" label="SAVE TEAM" @click="saveTeam()" v-if="list.length > 4" class="save-button" />
     </div>
     <div class="pokemonlist q-gutter-md">
       <PokeCard v-for="(pokemon, i) in pokeData" :key="i" :pokemon="pokemon" :entry_number="pokemon.entry_number"
@@ -356,19 +356,65 @@ function isActiveMenu(currentPath: string): string | void {
   width: 100%;
   min-height: 100px;
   padding: 0 0 1 1.2rem;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   background-color: rgba(224, 219, 209, 0.932);
   padding: 1rem 0 1rem 3rem;
   z-index: 10;
 
-  img {
-    width: 90%;
+  @media only screen and (max-device-width: 480px) {
+    padding: 0.5rem 0 0 0;
+  }
+
+  .user-data-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media only screen and (max-device-width: 480px) {
+      display: none;
+    }
+
+    .user-image {
+      height: 50px;
+    }
+
+    .username {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  hr {
+    @media only screen and (max-device-width: 480px) {
+      display: none;
+    }
+  }
+
+  .pokedex {
+    width: 10%;
+
+    @media only screen and (max-device-width: 480px) {
+      display: none;
+    }
+  }
+
+  .my-team {
+    font-weight: bold;
+    font-size: 1rem;
+
+    @media only screen and (max-device-width: 480px) {
+      display: none;
+    }
   }
 
   p {
     font-size: 1.1rem;
     font-weight: medium;
     color: rgb(136, 136, 136);
+
+    @media only screen and (max-device-width: 480px) {
+      display: none;
+    }
   }
 
   .ashImg {
@@ -376,6 +422,15 @@ function isActiveMenu(currentPath: string): string | void {
     border-radius: 12px;
     margin-right: 1.2rem;
     margin-left: 1.9rem;
+  }
+
+  .save-button {
+    margin-left: 1rem;
+
+    @media only screen and (max-device-width: 480px) {
+      margin-left: 0;
+      position: fixed;
+    }
   }
 }
 
