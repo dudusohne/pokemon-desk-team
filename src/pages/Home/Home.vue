@@ -63,17 +63,18 @@
 import { ref, reactive, onBeforeMount } from "vue";
 import { getDatabase, ref as Ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
-
+import { useRouter, useRoute } from "vue-router";
 import Modal from "../../components/Modal/Modal.vue";
 import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
-import { useRouter, useRoute } from "vue-router";
 
 const modal = ref(false);
-const list = reactive<Pokemon[]>([]);
 const pokeData = ref<any>();
+const list = reactive<Pokemon[]>([]);
+
+//TODO: improve-removing this object declaration
 const pokemon = reactive<Pokemon>({
   id: 0,
   name: "",
@@ -169,9 +170,9 @@ function saveTeam() {
       console.log(e);
     }
   }
-
 }
 
+// TODO: improve this function
 function handleRemove(id: number) {
   list.map(pokemon => {
     if (pokemon.id === id) {
@@ -188,6 +189,9 @@ const pokemonList = async () => {
   pokeData.value = response.data.pokemon_entries;
 };
 
+/*
+* Sign out the current user.
+*/
 function signOut() {
   auth.signOut();
   router.push({ name: "Login" });
@@ -195,6 +199,7 @@ function signOut() {
 
 /*
 * Handle's the pokemon details load/render
+* url - From the pokemon details api.
 */
 async function details(url: string) {
   try {
@@ -222,6 +227,9 @@ async function details(url: string) {
   }
 };
 
+/*
+* Do the CSS changes related to the active menu.
+*/
 function isActiveMenu(currentPath: string): string | void {
   if (currentPath === route.path) {
     return 'is-active'
