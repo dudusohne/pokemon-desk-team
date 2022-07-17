@@ -1,3 +1,4 @@
+// this typing its based on the api return (a mass)
 export interface Pokemon {
     id: number;
     entry_number: number;

@@ -16,13 +16,13 @@
                     </q-btn>
                 </q-bar>
 
-                <q-card-section>
+                <q-card-section style="padding-top: 0">
                     <div style="display: flex; flex-direction: column; align-items: center">
                         <div></div>
                         <img class="pokemon-img" :src="getPokemonImg(props.pokemon.id)" alt="image" />
-                        <div style="display: flex; flex-direction: row; margin-bottom: 10px; align-items: flex-start">
+                        <div class="poke-stats-board">
                             <InfoCard>
-                                <span style="color: rgb(189, 189, 189)">POWER:</span>
+                                <span>POWER:</span>
                                 <q-separator />
                                 <p style="font-size: 28px; font-weight: bold; color: rgb(255, 255, 255)">{{
                                         props.pokemon.base_experience
@@ -30,13 +30,13 @@
                             </InfoCard>
 
                             <InfoCard>
-                                <span style="color: rgb(189, 189, 189)">ABILITIES:</span>
+                                <span>ABILITIES:</span>
                                 <q-separator />
                                 <p v-for="abilt in props.pokemon.abilities">{{ abilt.ability.name }}</p>
                             </InfoCard>
 
                             <InfoCard>
-                                <span style="color: rgb(189, 189, 189)">TYPE(S):</span>
+                                <span>TYPE(S):</span>
                                 <q-separator />
                                 <div v-for="typ in props.pokemon.types">
                                     <q-chip class="flat" :color="props.pokemon.color" text-color="white">{{
@@ -45,8 +45,8 @@
                                 </div>
                             </InfoCard>
 
-                            <InfoCard>
-                                <span style="color: rgb(189, 189, 189)">INFO:</span>
+                            <InfoCard class="info">
+                                <span>INFO:</span>
                                 <q-separator />
                                 <div>
                                     <p>
@@ -62,7 +62,7 @@
                                 </div>
                             </InfoCard>
                         </div>
-                        <q-btn dense style="padding: 10px 10px 0px 10px; background-color: rgb(88, 88, 88)">
+                        <q-btn dense class="desc">
                             <div
                                 style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
                                 <p style="color: rgb(223, 223, 223)">{{ props.pokemon.description }}</p>
@@ -115,11 +115,49 @@ emit('clicked')
     margin-top: -1rem;
 }
 
+.poke-stats-board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    align-items: flex-start;
+
+    @media only screen and (max-device-width: 480px) {
+        margin-bottom: 5px;
+    }
+
+    span {
+        @media only screen and (max-device-width: 480px) {
+            font-size: 12px;
+        }
+    }
+
+    p {
+        @media only screen and (max-device-width: 480px) {
+            font-size: 12px;
+        }
+    }
+    .info {
+        @media only screen and (max-device-width: 480px) {
+            display: none;
+        }
+    }
+}
+
+.desc {
+    padding: 10px 10px 0px 10px;
+    background-color: rgb(88, 88, 88);
+
+    @media only screen and (max-device-width: 480px) {
+        font-size: 10px;
+    }
+}
+
 .pokemon-img {
     max-width: 300px;
 
-    @media (max-width: 468px) {
-      max-width: 200px;
+    @media only screen and (max-device-width: 480px) {
+        max-width: 150px;
     }
 }
 </style>
