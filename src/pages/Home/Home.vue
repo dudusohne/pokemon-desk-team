@@ -241,8 +241,6 @@ function isActiveMenu(currentPath: string): string | void {
 .home {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: rgb(29, 28, 28);
 
   .pokeheader {
     display: flex;
@@ -328,6 +326,7 @@ function isActiveMenu(currentPath: string): string | void {
         font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
+          margin-left: 0.2rem;
           font-size: 1.3rem;
         }
       }
@@ -341,6 +340,7 @@ function isActiveMenu(currentPath: string): string | void {
         margin-top: 3rem;
 
         @media only screen and (max-device-width: 480px) {
+          margin-top: 2.3rem;
           font-size: 1.2rem;
         }
       }
@@ -383,7 +383,7 @@ function isActiveMenu(currentPath: string): string | void {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: rgb(29, 28, 28);
+  /* background-color: rgb(29, 28, 28); */
   z-index: 1;
   margin-top: 0.2px;
 }

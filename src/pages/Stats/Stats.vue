@@ -95,7 +95,7 @@ function isActiveMenu(currentPath: string): string | void {
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(30deg, rgb(14, 27, 37) 0%, rgb(8, 16, 22) 93%);
+  /* background: linear-gradient(30deg, rgb(36, 34, 32) 0%, rgb(24, 23, 23) 93%); */
 
   .pokeheader {
     display: flex;
@@ -109,7 +109,7 @@ function isActiveMenu(currentPath: string): string | void {
     padding: 0.2rem 2rem 0.2rem 2rem;
     background-color: rgb(8, 16, 22);
     z-index: 10;
-    border-bottom: 3px solid rgb(10, 135, 173);
+    border-bottom: 3px solid rgb(216, 142, 30);
 
     @media only screen and (max-device-width: 480px) {
       padding: 0 0 0 0.2rem;
@@ -184,11 +184,8 @@ function isActiveMenu(currentPath: string): string | void {
         font-style: italic;
 
         @media only screen and (max-device-width: 480px) {
+          margin-left: 0.2rem;
           font-size: 1.3rem;
-        }
-
-        @media screen and (max-width: 500px) {
-          font-size: 1.2rem;
         }
       }
 
@@ -201,10 +198,7 @@ function isActiveMenu(currentPath: string): string | void {
         margin-top: 3rem;
 
         @media only screen and (max-device-width: 480px) {
-          font-size: 1.2rem;
-        }
-
-        @media screen and (max-width: 500px) {
+          margin-top: 2.3rem;
           font-size: 1.2rem;
         }
       }
@@ -248,6 +242,15 @@ function isActiveMenu(currentPath: string): string | void {
       img {
         width: 58px;
 
+        @media only screen and (max-device-width: 480px) {
+          width: 42px;
+        }
+      }
+
+      hr {
+        @media only screen and (max-device-width: 480px) {
+          margin-left: 10px
+        }
       }
 
       span {
@@ -258,6 +261,11 @@ function isActiveMenu(currentPath: string): string | void {
         font-size: 1rem;
 
         color: rgb(119, 119, 119);
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 0.8rem;
+          display: none;
+        }
       }
 
       p {
@@ -265,6 +273,10 @@ function isActiveMenu(currentPath: string): string | void {
         font-size: 1.3rem;
         margin: 0 0 0 1rem;
         color: cyan;
+
+        @media only screen and (max-device-width: 480px) {
+          font-size: 1rem;
+        }
       }
     }
   }
