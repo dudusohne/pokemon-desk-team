@@ -146,8 +146,6 @@ function saveTeam() {
     return result + item?.base_experience
   }, 0)
 
-  console.log('power: ', power.value)
-
   if (userTeam.length < 5 && userTeam.length > 5) {
     alert("Please select 5 pokemons before save!")
     return
