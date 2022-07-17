@@ -28,7 +28,6 @@ function getPokemonImg(id: number): string {
     const url = `https://raw.githubusercontent.com/oscarcz7/poke_api/master/src/assets/pokemon/${ans}.png`;
     return url;
 }
-
 </script>
 <style scoped lang="scss">
 .my-card {
