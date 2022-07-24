@@ -1,29 +1,7 @@
 <template>
   <div class="home">
-    <div v-if="!list.length" class="pokeheader">
-      <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
-      <div class="banner">
-        <h1>POKE</h1>
-        <h3>DESK</h3>
-      </div>
-      <div style="display: flex; flex-direction: row">
-        <q-btn push :class="isActiveMenu('/home')" icon="home" label="HOME" stack color="cyan"
-          style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
-          @click.prevent="router.push('/home')" />
-        <q-btn push :class="isActiveMenu('/stats')" icon="article" label="RANK" stack color="white" text-color="black"
-          style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
-          @click.prevent="router.push('/stats')" />
-      </div>
-      <div class="user-data">
-        <span>{{ auth.currentUser?.displayName }}</span>
-        <q-avatar>
-          <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser?.photoURL">
-        </q-avatar>
-        <q-icon name="logout" size="1.1rem" style="margin-left: 1rem; cursor: pointer; color: rgb(209, 196, 196);"
-          @click.prevent="signOut()" />
-      </div>
-    </div>
-    <div v-else class="pokeball">
+    <Header :userPhoto="auth.currentUser?.photoURL" :userName="auth.currentUser?.displayName" v-show="!list.length" :actualRoute="actualRoute" />
+    <div v-show="!!list.length" class="pokeball">
       <div class="user-data-wrapper">
         <q-avatar class="user-image">
           <img :src="auth.currentUser?.photoURL" v-if="auth.currentUser?.photoURL">
@@ -69,6 +47,7 @@ import PokeCard from '../../components/PokeCard/PokeCard.vue';
 import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
+import Header from '../../components/Header/Header.vue'
 
 const modal = ref(false);
 const pokeData = ref<any>();
@@ -110,6 +89,8 @@ const router = useRouter()
 const route = useRoute()
 
 const auth = getAuth();
+
+const actualRoute = ref(route.path)
 
 onBeforeMount(() => {
   pokemonList()
@@ -226,126 +207,12 @@ async function details(url: string) {
     console.log('catch erro: ', err);
   }
 };
-
-/*
-* Do the CSS changes related to the active menu.
-*/
-function isActiveMenu(currentPath: string): string | void {
-  if (currentPath === route.path) {
-    return 'is-active'
-  }
-}
 </script>
 
 <style lang="scss" scoped>
 .home {
   display: flex;
   flex-direction: column;
-
-  .pokeheader {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    height: 7vh;
-    width: 100%;
-
-    padding: 0.2rem 2rem 0.2rem 2rem;
-    background-color: rgb(8, 16, 22);
-    z-index: 10;
-    border-bottom: 3px solid rgb(10, 135, 173);
-
-    @media only screen and (max-device-width: 480px) {
-      padding: 0 0 0 0.2rem;
-    }
-
-    .is-active {
-      background-color: orange;
-      border-radius: 7px;
-    }
-
-    .logo {
-      width: 11%;
-      margin-top: 1rem;
-
-      @media only screen and (max-device-width: 480px) {
-        display: none;
-      }
-    }
-
-    .user-data {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-end;
-      width: 100%;
-
-      img {
-        border: 2px solid rgb(209, 196, 196);
-
-      }
-
-      span {
-        font-size: 1.2rem;
-        font-weight: bold;
-        font-family: 'Roboto', sans-serif;
-        color: rgb(209, 196, 196);
-
-        margin-right: 1rem;
-
-        @media only screen and (max-device-width: 480px) {
-          display: none;
-        }
-      }
-    }
-
-    .banner {
-      display: flex;
-      flex-direction: center;
-      justify-content: flex-start;
-      align-items: center;
-      width: 91%;
-      z-index: 10;
-
-      img {
-        width: 8%;
-        margin-left: 1.2rem;
-
-        @media only screen and (max-device-width: 480px) {
-          display: none;
-        }
-      }
-
-      h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: rgb(193, 195, 201);
-        margin-left: 2rem;
-        letter-spacing: -3px;
-        font-style: italic;
-
-        @media only screen and (max-device-width: 480px) {
-          margin-left: 0.2rem;
-          font-size: 1.3rem;
-        }
-      }
-
-      h3 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: rgb(239, 242, 255);
-        font-style: italic;
-
-        margin-top: 3rem;
-
-        @media only screen and (max-device-width: 480px) {
-          margin-top: 2.3rem;
-          font-size: 1.2rem;
-        }
-      }
-    }
-  }
 }
 
 .pokeball {
