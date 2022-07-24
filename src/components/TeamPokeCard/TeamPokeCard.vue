@@ -1,0 +1,85 @@
+<template>
+    <div class="my-card" :style="{ 'background-color': props.pokemon.color }">
+        <img :src="getPokemonImg(props.pokemon.id)" alt="image" />
+        <div class="footer">
+            <span class="pokename">
+                {{
+                        props.pokemon.name?.toUpperCase()
+                }}
+            </span>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { Pokemon } from '../../interface/types'
+
+interface Props {
+    pokemon: Pokemon
+}
+
+const props = defineProps<Props>();
+
+function getPokemonImg(id: number): string {
+    var str = "" + id;
+    var pad = "000";
+    const ans = pad.substring(0, pad.length - str.length) + str;
+    const url = `https://raw.githubusercontent.com/oscarcz7/poke_api/master/src/assets/pokemon/${ans}.png`;
+    return url;
+}
+</script>
+<style scoped lang="scss">
+.my-card {
+    display: flex;
+    flex-direction: column;
+    height: 22px;
+    border-radius: 12px;
+    margin-left: 1rem;
+
+    @media only screen and (max-device-width: 480px) {
+        height: 18px;
+        margin-left: 6px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    img {
+        margin-top: -1.3rem;
+        max-width: 120px;
+        height: 120px;
+
+        @media only screen and (max-device-width: 480px) {
+            margin-top: 0.1rem;
+            height: 70px;
+            max-width: 70px;
+        }
+    }
+
+    .pokename {
+        font-size: 14px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        margin-right: 1rem;
+
+        @media only screen and (max-device-width: 480px) {
+            display: none;
+        }
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(54, 54, 54);
+        border-radius: 2px;
+        padding: 8px;
+
+        @media only screen and (max-device-width: 480px) {
+            padding: 3px;
+        }
+    }
+}
+</style>

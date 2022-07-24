@@ -17,7 +17,7 @@
                 @click.prevent="router.push('/my-team')" />
         </div>
         <div class="user-data">
-            <span>{{ props.userName }}</span>
+            <span>{{ props?.userName }}</span>
             <q-avatar>
                 <img :src="props.userPhoto" v-if="props.userPhoto">
             </q-avatar>
@@ -41,7 +41,7 @@ const actualRoute = ref(route.path)
 
 interface Props {
     userPhoto?: any;
-    userName?: string;
+    userName?: string | null;
     actualRoute?: any;
 }
 
@@ -131,6 +131,7 @@ function signOut() {
         .inactive {
             background-color: rgb(158, 157, 156);
             border-radius: 7px;
+            opacity: 0.4;
         }
     }
 

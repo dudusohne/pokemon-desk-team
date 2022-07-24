@@ -58,7 +58,7 @@ function getPokemonImg(id: number): string {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .stats {
   display: flex;
   flex-direction: column;
