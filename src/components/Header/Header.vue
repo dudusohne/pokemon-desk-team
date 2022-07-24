@@ -1,19 +1,18 @@
 <template>
-    <div class="header">
+    <div class="header" :style="style">
         <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
         <div class="banner">
             <h1>POKE</h1>
             <h3>DESK</h3>
         </div>
         <div class="menu">
-            <q-btn push icon="home" label="HOME" stack color="green"
-                text-color="black"
+            <q-btn push :class="isActiveMenuHome('/home')" icon="home" label="HOME" stack
                 style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
                 @click.prevent="router.push('/home')" />
-            <q-btn push :class="isActiveMenu(props.actualRoute)" icon="article" label="RANK" stack
+            <q-btn push :class="isActiveMenuStats('/stats')" icon="article" label="RANK" stack
                 style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
                 @click.prevent="router.push('/stats')" />
-            <q-btn push :class="isActiveMenu(props.actualRoute)" icon="article" label="TEAM" stack
+            <q-btn push :class="isActiveMenuTeam('/my-team')" icon="people" label="TEAM" stack
                 style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
                 @click.prevent="router.push('/my-team')" />
         </div>
@@ -26,31 +25,64 @@
                 @click.prevent="signOut()" />
         </div>
     </div>
-
 </template>
 
 <script setup lang="ts">
 import { getAuth } from 'firebase/auth';
 import { useRoute, useRouter } from 'vue-router';
+import { ref, computed } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 
 const auth = getAuth();
 
+const actualRoute = ref(route.path)
+
 interface Props {
     userPhoto?: any;
-    userName?: any;
+    userName?: string;
     actualRoute?: any;
 }
 
 const props = defineProps<Props>()
 
-function isActiveMenu(currentPath: string): string | void {
-    if (currentPath === '/stats') {
-        return 'is-active'
+const borderBottomColor = ref<string>('rgb(23,255,255)')
+const backgroundColor = ref<string>('rgb(8, 16, 22)')
+
+const style = computed(() => ({
+    'border-bottom': `3px solid ${borderBottomColor.value}`,
+    'background-color': `${backgroundColor.value}`
+}))
+
+
+function isActiveMenuHome(menu: string) {
+    if (actualRoute.value === '/home' && menu) {
+        borderBottomColor.value = 'rgb(23,255,255)'
+        backgroundColor.value = 'rgb(26, 44, 44)'
+        return 'home'
     } else {
-        return 'is-inactive'
+        return 'inactive'
+    }
+}
+
+function isActiveMenuStats(menu: string) {
+    if (actualRoute.value === '/stats' && menu) {
+        borderBottomColor.value = 'rgb(255, 232, 21)'
+        backgroundColor.value = 'rgb(32, 31, 25)'
+        return 'stats'
+    } else {
+        return 'inactive'
+    }
+}
+
+function isActiveMenuTeam(menu: string) {
+    if (actualRoute.value === '/my-team' && menu) {
+        borderBottomColor.value = 'rgb(36, 218, 20)'
+        backgroundColor.value = 'rgb(22, 27, 21)'
+        return 'team'
+    } else {
+        return 'inactive'
     }
 }
 
@@ -71,9 +103,7 @@ function signOut() {
     width: 100%;
 
     padding: 0.2rem 2rem 0.2rem 2rem;
-    background-color: rgb(8, 16, 22);
     z-index: 10;
-    border-bottom: 3px solid rgb(216, 142, 30);
 
     @media only screen and (max-device-width: 480px) {
         padding: 0 0 0 0.2rem;
@@ -83,13 +113,23 @@ function signOut() {
         display: flex;
         flex-direction: row;
 
-        .is-active {
-            background-color: rgb(158, 146, 35);
+        .home {
+            background-color: rgb(23, 255, 255);
             border-radius: 7px;
         }
 
-        .is-inactive {
-            background-color: rgb(158, 101, 35);
+        .stats {
+            background-color: rgb(255, 232, 21);
+            border-radius: 7px;
+        }
+
+        .team {
+            background-color: rgb(36, 218, 20);
+            border-radius: 7px;
+        }
+
+        .inactive {
+            background-color: rgb(158, 157, 156);
             border-radius: 7px;
         }
     }
@@ -98,6 +138,10 @@ function signOut() {
     .logo {
         width: 11%;
         margin-top: 1rem;
+
+        @media screen and (max-width: 800px) {
+            display: none;
+        }
 
         @media only screen and (max-device-width: 480px) {
             display: none;

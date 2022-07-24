@@ -18,7 +18,6 @@ const resultData = ref()
 
 const auth = getAuth();
 
-const router = useRouter()
 const route = useRoute()
 
 const actualRoute = ref(route.path)
