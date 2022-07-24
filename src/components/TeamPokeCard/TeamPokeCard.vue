@@ -28,6 +28,7 @@ function getPokemonImg(id: number): string {
     return url;
 }
 </script>
+
 <style scoped lang="scss">
 .my-card {
     display: flex;

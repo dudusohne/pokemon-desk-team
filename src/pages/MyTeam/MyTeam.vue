@@ -3,7 +3,7 @@
     <Header :userPhoto="auth.currentUser?.photoURL" :userName="auth.currentUser?.displayName"
       :actualRoute="actualRoute" />
     <div class="container">
-      <TeamPokeCard v-for="(pokemon, i) in resultData.team" :key="i" :pokemon="pokemon" />
+      <TeamPokeCard v-for="(pokemon, i) in resultData?.team" :key="i" :pokemon="pokemon" />
     </div>
   </div>
 </template>
@@ -28,8 +28,7 @@ const dbRef = Ref(getDatabase());
 get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     resultData.value = snapshot.val()
-    console.log(resultData.value)
-    return resultData.value
+    return resultData.value.team
   } else {
     console.log("No data available");
   }
