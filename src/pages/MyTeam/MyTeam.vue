@@ -5,6 +5,7 @@
     <div class="container">
       <TeamPokeCard v-for="(pokemon, i) in resultData?.team" :key="i" :pokemon="pokemon" />
     </div>
+    <BottomBar />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import { getAuth } from "firebase/auth";
 import { useRoute } from "vue-router";
 import Header from '../../components/Header/Header.vue'
 import TeamPokeCard from "../../components/TeamPokeCard/TeamPokeCard.vue";
+import BottomBar from "../../components/BottomBar/BottomBar.vue"
 
 const resultData = ref()
 
