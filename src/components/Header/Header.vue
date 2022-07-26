@@ -113,6 +113,10 @@ function signOut() {
         display: flex;
         flex-direction: row;
 
+        @media only screen and (max-device-width: 480px) {
+            display: none;
+        }
+
         .home {
             background-color: rgb(23, 255, 255);
             border-radius: 7px;

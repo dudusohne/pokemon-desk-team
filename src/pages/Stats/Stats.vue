@@ -14,6 +14,7 @@
         <p v-if="!!stats.power">{{ stats.power }} pts</p>
       </div>
     </div>
+    <BottomBar />
   </div>
 </template>
 
@@ -21,8 +22,9 @@
 import { ref } from "vue";
 import { getDatabase, ref as Ref, get, child } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import Header from '../../components/Header/Header.vue'
+import BottomBar from "../../components/BottomBar/BottomBar.vue";
 
 const resultData = ref()
 

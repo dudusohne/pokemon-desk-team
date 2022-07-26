@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Header :userPhoto="auth.currentUser?.photoURL" :userName="auth.currentUser?.displayName" v-show="!list.length" :actualRoute="actualRoute" />
+    <Header :userPhoto="auth.currentUser?.photoURL" :userName="auth.currentUser?.displayName" v-show="!list.length"
+      :actualRoute="actualRoute" />
     <div v-show="!!list.length" class="pokeball">
       <div class="user-data-wrapper">
         <q-avatar class="user-image">
@@ -34,6 +35,7 @@
         </template>
       </Modal>
     </div>
+    <BottomBar />
   </div>
 </template>
 
@@ -48,6 +50,7 @@ import TeamCard from '../../components/TeamCard/TeamCard.vue';
 import { Pokemon } from '../../interface/types';
 import api from '../../services/api';
 import Header from '../../components/Header/Header.vue'
+import BottomBar from "../../components/BottomBar/BottomBar.vue";
 
 const modal = ref(false);
 const pokeData = ref<any>();

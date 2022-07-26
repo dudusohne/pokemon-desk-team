@@ -17,6 +17,7 @@
       <span class="container-desc">you can roll and get a new team</span>
       <q-btn label="ROLL" color="yellow" text-color="black" style="margin-top: 1rem" />
     </div>
+    <BottomBar />
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import { getAuth } from "firebase/auth";
 import { useRoute } from "vue-router";
 import Header from '../../components/Header/Header.vue'
 import TeamPokeCard from "../../components/TeamPokeCard/TeamPokeCard.vue";
+import BottomBar from "../../components/BottomBar/BottomBar.vue"
 
 const resultData = ref()
 
