@@ -3,7 +3,19 @@
     <Header :userPhoto="auth.currentUser?.photoURL" :userName="auth.currentUser?.displayName"
       :actualRoute="actualRoute" />
     <div class="container">
-      <TeamPokeCard v-for="(pokemon, i) in resultData?.team" :key="i" :pokemon="pokemon" />
+      <span class="container-title">YOUR TEAM</span>
+      <q-separator style="margin-bottom: 1rem; margin-top: 1rem;" color="white" />
+      <div style="display: flex; flex-direction: row">
+        <TeamPokeCard v-for="(pokemon, i) in resultData?.team" :key="i" :pokemon="pokemon" />
+      </div>
+      <q-separator style="margin-bottom: 0.4rem; margin-top: 1rem;" color="green" />
+      <div class="team-power">
+        <span>TEAM POWER:</span>
+        <p>340</p>
+      </div>
+      <q-separator color="green" />
+      <span class="container-desc">you can roll and get a new team</span>
+      <q-btn label="ROLL" color="yellow" text-color="black" style="margin-top: 1rem" />
     </div>
   </div>
 </template>
@@ -35,32 +47,6 @@ get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
 }).catch((error) => {
   console.error(error);
 });
-
-// async function details(url: string) {
-//   try {
-//     const urlResponse = await api.urlPokemon(url)
-//     pokemon.color = urlResponse.data.color.name;
-
-//     const descResponse = await api.uniquePokemon(urlResponse.data.id)
-//     const textResponses = descResponse.data.flavor_text_entries.filter(
-//       (element: string | any) => element.language.name == "en"
-//     );
-//     pokemon.description = textResponses[0].flavor_text;
-
-//     const pokemonResponse = await api.detailsPokemon(urlResponse.data.id)
-//     pokemon.abilities = pokemonResponse.data.abilities;
-//     pokemon.types = pokemonResponse.data.types;
-//     pokemon.weight = pokemonResponse.data.weight;
-//     pokemon.height = pokemonResponse.data.height;
-//     pokemon.name = pokemonResponse.data.name;
-//     pokemon.id = pokemonResponse.data.id;
-//     pokemon.types = pokemonResponse.data.types;
-//     pokemon.base_experience = pokemonResponse.data.base_experience;
-//     modal.value = true;
-//   } catch (err) {
-//     console.log('catch erro: ', err);
-//   }
-// };
 </script>
 
 <style lang="scss" scoped>
@@ -72,9 +58,40 @@ get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
 
   .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     margin-top: 3rem;
+
+    .container-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .container-desc {
+      font-size: 1rem;
+      font-weight: medium;
+      color: #ffeb3b71;
+
+      margin-top: 2.5rem;
+    }
+
+    .team-power {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-size: 0.5rem;
+        font-weight: medium;
+        color: rgb(199, 199, 199);
+      }
+
+      p {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: rgb(123, 221, 101);
+      }
+    }
   }
 }
 </style>

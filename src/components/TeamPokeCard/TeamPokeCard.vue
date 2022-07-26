@@ -1,5 +1,5 @@
 <template>
-    <div class="my-card" :style="{ 'background-color': props.pokemon.color }">
+    <div class="team-poke-card" :style="style">
         <img :src="getPokemonImg(props.pokemon.id)" alt="image" />
         <div class="footer">
             <span class="pokename">
@@ -8,11 +8,16 @@
                 }}
             </span>
         </div>
+        <div class="power-wrapper">
+            <q-icon name="pets" size="1.4rem" />
+            <span class="power">{{ props.pokemon?.base_experience }}</span>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { Pokemon } from '../../interface/types'
+import { computed, StyleValue } from 'vue'
 
 interface Props {
     pokemon: Pokemon
@@ -27,19 +32,29 @@ function getPokemonImg(id: number): string {
     const url = `https://raw.githubusercontent.com/oscarcz7/poke_api/master/src/assets/pokemon/${ans}.png`;
     return url;
 }
+
+const style = computed<StyleValue>(() => ({
+    'background-color': props.pokemon.color
+}))
 </script>
 
 <style scoped lang="scss">
-.my-card {
+.team-poke-card {
     display: flex;
     flex-direction: column;
-    height: 22px;
+    height: 150px;
+    width: 120px;
     border-radius: 12px;
-    margin-left: 1rem;
+    background-color: #aeaeae;
+    background: repeating-linear-gradient(45deg, transparent, transparent 6px, #252525 65px, #202020 70px);
+
+    border: 2px solid rgb(63, 63, 63);
+
+    margin-left: 5px;
 
     @media only screen and (max-device-width: 480px) {
-        height: 18px;
-        margin-left: 6px;
+        height: 120px;
+        width: 70px;
     }
 
     &:hover {
@@ -58,14 +73,35 @@ function getPokemonImg(id: number): string {
         }
     }
 
-    .pokename {
-        font-size: 14px;
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-        margin-right: 1rem;
+    .power-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        padding: 0 2px 0 2px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        margin-left: 1px;
+
+        background-color: rgb(218, 218, 218);
+
+        overflow: hidden;
+
+        border-radius: 4px;
+        border-bottom-left-radius: 12px;
+        border: 1px solid black;
 
         @media only screen and (max-device-width: 480px) {
-            display: none;
+            padding: 0;
+            margin-bottom: 0;
+            height: 30px;
+        }
+
+        .power {
+            font-size: 1.2rem;
+            font-weight: bold;
+
+            color: rgb(18, 18, 19);
         }
     }
 
@@ -76,10 +112,16 @@ function getPokemonImg(id: number): string {
         justify-content: center;
         background-color: rgb(54, 54, 54);
         border-radius: 2px;
-        padding: 8px;
 
         @media only screen and (max-device-width: 480px) {
-            padding: 3px;
+            display: none;
+        }
+
+        .pokename {
+            font-size: 14px;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            margin-right: 1rem;
         }
     }
 }
