@@ -181,6 +181,38 @@ function signOut() {
   router.push({ name: "Login" });
 }
 
+function resolveColor(type: any) {
+  if (type === "fire") {
+    return '#d64949'
+  } if (type === "grass") {
+    return '#afea75'
+  } if (type === "normal") {
+    return '#dfce6d'
+  } if (type === "water") {
+    return '#6dd0df'
+  } if (type === "psychic") {
+    return '#786ddf'
+  } if (type === "bug") {
+    return '#abdf6d'
+  } if (type === "poison") {
+    return '#ae78ea'
+  } if (type === "electric") {
+    return '#e3ea78'
+  } if (type === "ground") {
+    return '#a48360'
+  } if (type === "fighting") {
+    return '#ecc0a5'
+  } if (type === "rock") {
+    return '#7f6c61'
+  } if (type === "ice") {
+    return '#a8d2ea'
+  } if (type === "dragon") {
+    return '#c06642'
+  } if (type === "fairy") {
+    return '#ffb3ab'
+  }
+}
+
 /*
 * Handle's the pokemon details load/render
 * url - From the pokemon details api.
@@ -188,7 +220,7 @@ function signOut() {
 async function details(url: string) {
   try {
     const urlResponse = await api.urlPokemon(url)
-    pokemon.color = urlResponse.data.color.name;
+    // pokemon.color = urlResponse.data.color.name;
 
     const descResponse = await api.uniquePokemon(urlResponse.data.id)
     const textResponses = descResponse.data.flavor_text_entries.filter(
@@ -204,6 +236,7 @@ async function details(url: string) {
     pokemon.name = pokemonResponse.data.name;
     pokemon.id = pokemonResponse.data.id;
     pokemon.types = pokemonResponse.data.types;
+    pokemon.color = resolveColor(pokemonResponse.data.types[0].type?.name);
     pokemon.base_experience = pokemonResponse.data.base_experience;
     modal.value = true;
   } catch (err) {

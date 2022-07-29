@@ -39,7 +39,7 @@
                                 <span>TYPE(S):</span>
                                 <q-separator />
                                 <div v-for="typ in props.pokemon.types">
-                                    <q-chip class="flat" :color="props.pokemon.color" text-color="white">{{
+                                    <q-chip class="flat" :color="props.pokemon.color">{{
                                             typ.type.name
                                     }}</q-chip>
                                 </div>
