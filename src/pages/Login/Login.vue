@@ -1,22 +1,12 @@
 <template>
   <div class="login">
     <div class="container">
-      <img class="logo" src="../../assets/pokemonlogo.png" alt="pokemon" />
-      <img class="ash" src="../../assets/ash.png" alt="pokemon" />
-      <div class="banner">
-        <div style="display: flex; flex-direction: row; height: 8rem;">
-          <h1>POKE</h1>
-          <h3>DESK</h3>
-        </div>
-        <p style="font-size: 1rem; font-weight: bold; font-style: italic; font-variant: small-caps;">monte seu time</p>
+      <div class="login-banner">
+        <span class="poke">POKE</span>
+        <span class="desk">DESK</span>
+        <img src="../../assets/pokeballimg.png" alt="pokeball" />
       </div>
-      <hr />
-      <q-btn @click.prevent="Login()">
-        login
-      </q-btn>
-      <q-separator color="black" />
-      <p style="font-size: 1rem;">Faça login acima com sua conta GOOGLE.</p>
-      <span style="font-size: 1rem; font-weight: bold; font-style: italic; font-variant: small-caps; color: gray">é gratuíto</span>
+      <q-btn @click.prevent="Login()" icon-right="mail" label="login" />
     </div>
   </div>
 </template>
@@ -82,34 +72,22 @@ function Login() {
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(30deg, rgb(14, 27, 37) 0%, rgb(8, 16, 22) 93%);
-  background-size: cover;
+  background-image: linear-gradient(135deg, #ABDCFF 10%, #0396FF 100%);
+
 
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     height: 47vh;
 
     width: 470px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 40px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.733);
-
-    &:hover {
-      opacity: 0.9;
-      transition: 0.5s ease-in-out;
-    }
 
     @media (max-width: 468px) {
+      flex-direction: column;
       width: 90%;
-      height: 39vh;
-    }
-
-    img {
-      margin-top: -3rem;
-      width: 50%;
+      height: 50vh;
     }
 
     button {
@@ -117,79 +95,66 @@ function Login() {
       height: 50px;
       border-radius: 5px;
       border: none;
-      background-color: #4285f4;
+      background-color: #c04433;
       color: #fff;
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
 
       &:hover {
-        background-color: #194996;
-        transition: 0.3s;
+        opacity: 0.8;
+        transition: 0.3s all ease-in-out;
       }
     }
 
-    p {
-      font-size: 18px;
-      font-weight: bold;
-      color: rgba(135, 139, 158, 0.911);
-      margin-bottom: 2rem;
-    }
-
-    .logo {
-      z-index: 3;
-    }
-
-    .ash {
-      width: 100%;
-      height: 18rem;
-      border-top-left-radius: 40px;
-      border-top-right-radius: 40px;
-
-      @media only screen and (max-device-width: 480px) {
-        width: 100%;
-        height: 10rem;
-      }
-    }
-
-    .banner {
+    .login-banner {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      line-height: 58px;
       align-items: center;
-      width: 91%;
-      z-index: 10;
-      height: 8rem;
 
-      @media only screen and (max-device-width: 480px) {
-        margin-top: 2.6rem;
-        height: 2rem;
+      @media only screen and (max-device-width: 480px) {}
+
+      .poke {
+        font-size: 4rem;
+        font-weight: bold;
+        color: rgb(17, 17, 17);
+
+        @media only screen and (max-device-width: 480px) {}
       }
 
-      h1 {
-        font-size: 2.3rem;
+      .desk {
+        font-size: 5rem;
         font-weight: bold;
-        color: rgb(29, 31, 34);
-        letter-spacing: -3px;
-        font-style: italic;
+        z-index: 5;
+        color: rgb(17, 17, 17);
 
-        @media only screen and (max-device-width: 480px) {
-          font-size: 2.3rem;
-          line-height: 0;
+        @media only screen and (max-device-width: 480px) {}
+      }
+
+      img {
+        margin-top: -1.3rem;
+        width: 100px;
+        height: 100px;
+        z-index: 0;
+
+        -webkit-animation: rotate 3s ease 0s 2 normal;
+        -moz-animation: rotate 3s ease 0s 2 normal;
+        -ms-animation: rotate 3s ease 0s 2 normal;
+        animation: rotate 3s ease 0s 2 normal;
+
+
+        @-webkit-keyframes rotate {
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
         }
-      }
 
-      h3 {
-        font-size: 2.4rem;
-        font-weight: bold;
-        color: rgb(102, 102, 102);
-        font-style: italic;
-        margin-top: 4 .1rem;
-
-        @media only screen and (max-device-width: 480px) {
-          margin-top: 2.1rem;
-          font-size: 1.9rem;
-          line-height: 0;
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
         }
       }
     }

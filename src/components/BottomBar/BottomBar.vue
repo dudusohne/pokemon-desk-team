@@ -1,15 +1,17 @@
 <template>
     <div class="bottom-bar">
         <div class="menu" :style="style">
-            <q-btn push :class="isActiveMenuHome('/home')" icon="home" label="HOME" stack
-                style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
-                @click.prevent="router.push('/home')" />
-            <q-btn push :class="isActiveMenuStats('/stats')" icon="article" label="RANK" stack
-                style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
-                @click.prevent="router.push('/stats')" />
-            <q-btn push :class="isActiveMenuTeam('/my-team')" icon="people" label="TEAM" stack
-                style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
-                @click.prevent="router.push('/my-team')" />
+            <div style="margin-top: -1.2rem">
+                <q-btn push :class="isActiveMenuHome('/home')" icon="home" label="HOME" stack
+                    style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
+                    @click.prevent="router.push('/home')" />
+                <q-btn push :class="isActiveMenuStats('/stats')" icon="article" label="RANK" stack
+                    style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
+                    @click.prevent="router.push('/stats')" />
+                <q-btn push :class="isActiveMenuTeam('/my-team')" icon="people" label="TEAM" stack
+                    style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
+                    @click.prevent="router.push('/my-team')" />
+            </div>
         </div>
     </div>
 </template>
@@ -67,9 +69,8 @@ function isActiveMenuTeam(menu: string): string {
 .bottom-bar {
     position: fixed;
     bottom: 0;
-    height: 8vh;
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 
     z-index: 10;
 
@@ -82,7 +83,7 @@ function isActiveMenuTeam(menu: string): string {
         align-items: center;
         justify-content: center;
         flex-direction: row;
-        height: 8vh;
+        height: 6vh;
 
         .home {
             background-color: rgb(23, 255, 255);
