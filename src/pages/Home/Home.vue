@@ -173,15 +173,7 @@ const pokemonList = async () => {
   pokeData.value = response.data.pokemon_entries;
 };
 
-/*
-* Sign out the current user.
-*/
-function signOut() {
-  auth.signOut();
-  router.push({ name: "Login" });
-}
-
-function resolveColor(type: any) {
+function resolveColor(type: string): string {
   if (type === "fire") {
     return '#d64949'
   } if (type === "grass") {
@@ -210,6 +202,8 @@ function resolveColor(type: any) {
     return '#c06642'
   } if (type === "fairy") {
     return '#ffb3ab'
+  } else {
+    return 'white'
   }
 }
 

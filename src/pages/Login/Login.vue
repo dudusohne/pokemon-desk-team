@@ -6,7 +6,7 @@
         <span class="desk">DESK</span>
         <img src="../../assets/pokeballimg.png" alt="pokeball" />
       </div>
-      <q-btn @click.prevent="Login()" icon-right="mail" label="login" />
+      <q-btn @click.prevent="Login()" icon-right="bi-google" label="login" icon-size="2px" />
     </div>
   </div>
 </template>

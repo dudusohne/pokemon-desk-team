@@ -5,7 +5,7 @@
                 <q-btn push :class="isActiveMenuHome('/home')" icon="home" label="HOME" stack
                     style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
                     @click.prevent="router.push('/home')" />
-                <q-btn push :class="isActiveMenuStats('/stats')" icon="article" label="RANK" stack
+                <q-btn push :class="isActiveMenuStats('/stats')" icon="bi-bar-chart-line-fill" label="RANK" stack
                     style="cursor: pointer; color: black; margin-right: 0.4rem; height: 3.2rem; margin-top: 0.4rem;"
                     @click.prevent="router.push('/stats')" />
                 <q-btn push :class="isActiveMenuTeam('/my-team')" icon="people" label="TEAM" stack

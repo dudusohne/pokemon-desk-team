@@ -14,8 +14,8 @@
         <p>340</p>
       </div>
       <q-separator color="green" />
-      <span class="container-desc">you can roll and get a new team</span>
-      <q-btn label="ROLL" color="yellow" text-color="black" style="margin-top: 1rem" />
+      <!-- <span class="container-desc">you can roll and get a new team</span>
+      <q-btn label="ROLL" color="yellow" text-color="black" style="margin-top: 1rem" /> -->
     </div>
     <BottomBar />
   </div>
@@ -62,7 +62,7 @@ get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
     display: flex;
     flex-direction: column;
 
-    margin-top: 3rem;
+    margin-top: 2rem;
 
     .container-title {
       font-size: 1.6rem;
