@@ -1,4 +1,4 @@
-// this typing its based on the api return (a mass)
+// this typing its based on the external api (a mass)
 export interface Pokemon {
     id: number;
     entry_number: number;

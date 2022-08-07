@@ -22,13 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { getDatabase, ref as Ref, get, child } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { useRoute } from "vue-router";
 import Header from '../../components/Header/Header.vue'
 import TeamPokeCard from "../../components/TeamPokeCard/TeamPokeCard.vue";
 import BottomBar from "../../components/BottomBar/BottomBar.vue"
+import { getTeamData } from "../../helpers/getData";
 
 const resultData = ref()
 
@@ -38,17 +39,25 @@ const route = useRoute()
 
 const actualRoute = ref(route.path)
 
-const dbRef = Ref(getDatabase());
-get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
-  if (snapshot.exists()) {
-    resultData.value = snapshot.val()
-    return resultData.value.team
-  } else {
-    console.log("No data available");
-  }
-}).catch((error) => {
-  console.error(error);
-});
+const databaseRef = Ref(getDatabase());
+
+onMounted(() => {
+  resultData.value = getTeamData(databaseRef, auth.currentUser?.uid)
+  console.log(resultData.value)
+})
+
+
+// const dbRef = Ref(getDatabase());
+// get(child(dbRef, `users/${auth.currentUser?.uid}`)).then((snapshot) => {
+//   if (snapshot.exists()) {
+//     resultData.value = snapshot.val()
+//     return resultData.value.team
+//   } else {
+//     console.log("No data available");
+//   }
+// }).catch((error) => {
+//   console.error(error);
+// });
 </script>
 
 <style lang="scss" scoped>
