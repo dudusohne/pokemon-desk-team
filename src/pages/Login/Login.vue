@@ -6,27 +6,31 @@
         <span class="desk">DESK</span>
         <img src="../../assets/pokeballimg.png" alt="pokeball" />
       </div>
-      <q-btn @click.prevent="Login()" icon-right="bi-google" label="login" icon-size="2px" />
+      <q-btn @click.prevent="Login()" icon-right="bi-google" label="login" icon-size="2px" :loading="isLoading" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const provider = new GoogleAuthProvider();
 
 const router = useRouter()
 
+const isLoading = ref()
+
 onBeforeMount(
   () => {
+    isLoading.value = true
     getAuth().onAuthStateChanged(
       (user) => {
         if (!!user) {
           router.push("/home");
         }
+        isLoading.value = false
       }
     );
   }
